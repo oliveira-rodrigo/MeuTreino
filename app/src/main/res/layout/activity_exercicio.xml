@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_lista"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="app.meutreino.ExercicioActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleLista"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/exercicio_list_row" />
+
+    <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fab_novo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:background="@color/azul"
+        android:onClick="abrirCadastro"
+        android:tint="#fff"
+        app:backgroundTint="@color/azul"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+</android.support.design.widget.CoordinatorLayout>

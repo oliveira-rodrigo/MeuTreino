@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_categoria_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="app.meutreino.CategoriaFormActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_categoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Categoria" />
+
+        <EditText
+            android:id="@+id/editTextNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_categoria"
+            android:layout_margin="10dp"
+            android:background="@drawable/edittext_form_shape"
+            android:hint="Nome da categoria"
+            android:padding="5dp" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@color/vermelho"
+        android:onClick="cancelar"
+        android:tint="#fff"
+        app:backgroundTint="@color/vermelho"
+        app:fab_colorNormal="@color/vermelho"
+        app:srcCompat="@drawable/ic_cancel_black_48dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabSalvar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@color/verde"
+        android:onClick="salvar"
+        android:tint="#fff"
+        app:backgroundTint="@color/verde"
+        app:fab_colorNormal="@color/verde"
+        app:srcCompat="@drawable/ic_save_black_48dp" />
+
+</android.support.design.widget.CoordinatorLayout>

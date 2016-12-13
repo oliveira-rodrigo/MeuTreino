@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="app.meutreino">
+
+    <application
+        android:name="com.orm.SugarApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="MeuTreino.db" />
+
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="app.meutreino.entidade" />
+
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".CriarContaActivity" />
+        <activity android:name=".ListaActivity" />
+        <activity android:name=".ConfiguracoesActivity" />
+        <activity android:name=".CadastroActivity" />
+        <activity android:name=".CategoriaActivity" />
+        <activity android:name=".CategoriaFormActivity" />
+        <activity android:name=".ExercicioActivity" />
+        <activity android:name=".ExercicioFormActivity" />
+        <activity android:name=".TreinoActivity" />
+        <activity android:name=".TreinoFormActivity" />
+        <activity android:name=".PesoActivity" />
+        <activity android:name=".PesoFormActivity"></activity>
+    </application>
+
+</manifest>

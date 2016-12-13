@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4e504e"
+    tools:context=".SplashActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/splashTextLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/app_name_pre"
+            android:textColor="#FFEF40"
+            android:textSize="60dp"
+            android:gravity="right|top"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/splashTextRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/app_name_pos"
+            android:textColor="#FFEF40"
+            android:textSize="36dp"
+            android:gravity="bottom" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/splashVersao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="v 1.0.0"
+        android:textColor="#FFEF40"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

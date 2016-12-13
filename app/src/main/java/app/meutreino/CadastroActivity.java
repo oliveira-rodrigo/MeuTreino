@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CadastroActivity extends MainActivity implements Validator.ValidationListener {
 
-    @NotEmpty(message = "Campo obrigatório")
+    @NotEmpty(message = "Campo obrigatório ")
     EditText editText;
 
     Validator validator;

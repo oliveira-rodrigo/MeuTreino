@@ -1,6 +1,7 @@
 package app.meutreino;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Animation a = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         a.reset();

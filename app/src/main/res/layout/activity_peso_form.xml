@@ -13,25 +13,41 @@
         android:layout_margin="10dp"
         android:background="#FFF">
 
+        <TextView
+            android:id="@+id/tv_peso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Peso" />
+
         <EditText
             android:id="@+id/editPeso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_peso"
             android:layout_margin="10dp"
-            android:background="@android:color/transparent"
-            android:backgroundTint="#202020"
+            android:background="@drawable/edittext_form_shape"
             android:hint="Peso"
             android:padding="5dp" />
+
+        <TextView
+            android:id="@+id/tv_data_pesagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/editPeso"
+            android:text="Data da pesagem" />
 
         <EditText
             android:id="@+id/editDtPesagem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editPeso"
+            android:layout_below="@id/tv_data_pesagem"
             android:layout_margin="10dp"
-            android:background="@android:color/transparent"
-            app:backgroundTint="#202020"
-            android:hint="Data de início"
+            android:background="@drawable/edittext_form_shape"
+            android:hint="Data da pesagem"
             android:padding="5dp" />
 
     </RelativeLayout>

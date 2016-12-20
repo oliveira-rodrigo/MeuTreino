@@ -39,14 +39,6 @@ public class CategoriaActivity extends MainActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycleLista);
 
-        //TESTE DATABASE
-        /*List<Categoria> lista = Categoria.listAll(Categoria.class);
-        int qtde = lista.size();
-        if (qtde == 0) {
-            prepareTestData();
-        }*/
-        //TESTE DATABASE
-
         mAdapter = new CategoriaAdapter(Categoria.listAll(Categoria.class), new RecyclerViewClickListener() {
             @Override
             public void onViewClicked(View v, int position) {
@@ -70,13 +62,6 @@ public class CategoriaActivity extends MainActivity {
 
     public void abrirCadastro(View v) {
         startActivity(new Intent(this, CategoriaFormActivity.class));
-    }
-
-    private void prepareTestData() {
-        for (int i = 0; i <= 30; i++) {
-            Categoria categoria = new Categoria("Nome " + i, true);
-            categoria.save();
-        }
     }
 
     @Override

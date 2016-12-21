@@ -13,12 +13,24 @@ import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
+
+import app.meutreino.comum.Mask;
+import app.meutreino.comum.MaskDecimal;
+import app.meutreino.comum.MaskMoney;
+import app.meutreino.comum.Util;
+import app.meutreino.entidade.Peso;
 
 public class PesoFormActivity extends MainActivity implements Validator.ValidationListener {
 
     @NotEmpty(message = "Campo obrigatório")
-    EditText editText;
+    EditText editPeso, editDtPesagem;
 
     Validator validator;
 
@@ -41,7 +53,11 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
         // Setting title
         setTitle("Cadastro de peso");
 
-        editText = (EditText) findViewById(R.id.editPeso);
+        editPeso = (EditText) findViewById(R.id.editPeso);
+        //editPeso.addTextChangedListener(new MaskDecimal(editPeso));
+
+        editDtPesagem = (EditText) findViewById(R.id.editDtPesagem);
+        editDtPesagem.addTextChangedListener(Mask.insert("##/##/####", editDtPesagem));
 
         validator = new Validator(this);
         validator.setValidationListener(this);
@@ -65,8 +81,8 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
     public void onValidationSucceeded() {
         // a validação passou , siga em frente
         try {
-           /* Categoria categoria = new Categoria(editText.getText().toString().trim(), true);
-            categoria.save();*/
+            Peso peso = new Peso(Float.valueOf(editPeso.getText().toString()), new Util().stringToDate(editDtPesagem.getText().toString()));
+            peso.save();
             startActivity(new Intent(this, PesoActivity.class));
         } catch (Exception e) {
             Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)

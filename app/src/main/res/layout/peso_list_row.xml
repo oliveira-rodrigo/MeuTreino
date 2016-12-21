@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Nome exercicio"
+            android:text="Peso"
             android:textColor="#303030" />
 
         <TextView
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Nome categoria"
+            android:text="Data da pesagem"
             android:textColor="#303030"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/tv_peso"

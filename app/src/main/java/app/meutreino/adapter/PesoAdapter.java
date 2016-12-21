@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import app.meutreino.R;
 import app.meutreino.comum.RecyclerViewClickListener;
-import app.meutreino.entidade.Categoria;
 import app.meutreino.entidade.Peso;
 
 /**
@@ -38,7 +38,7 @@ public class PesoAdapter extends RecyclerView.Adapter<PesoAdapter.MyViewHolder> 
             imgDeletar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(listener != null)
+                    if (listener != null)
                         listener.onViewClicked(v, getAdapterPosition());
                 }
             });
@@ -46,7 +46,7 @@ public class PesoAdapter extends RecyclerView.Adapter<PesoAdapter.MyViewHolder> 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(listener != null)
+                    if (listener != null)
                         listener.onRowClicked(getAdapterPosition());
                 }
             });
@@ -70,7 +70,9 @@ public class PesoAdapter extends RecyclerView.Adapter<PesoAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Peso peso = list.get(position);
         holder.peso.setText("Peso: " + peso.getValor());
-        holder.dtPesagem.setText("Peso: " + peso.getDataPesagem());
+        holder.dtPesagem.setText(peso.getDataPesagem() != null ?
+                "Data da pesagem: " + new SimpleDateFormat("dd/MM/yyyy").format(peso.getDataPesagem()) :
+                "Data da pesagem:");
     }
 
     @Override

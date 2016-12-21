@@ -29,15 +29,16 @@
             android:layout_margin="10dp"
             android:background="@drawable/edittext_form_shape"
             android:hint="Peso"
+            android:inputType="numberSigned"
             android:padding="5dp" />
 
         <TextView
             android:id="@+id/tv_data_pesagem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/editPeso"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/editPeso"
             android:text="Data da pesagem" />
 
         <EditText
@@ -48,6 +49,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/edittext_form_shape"
             android:hint="Data da pesagem"
+            android:inputType="numberSigned"
             android:padding="5dp" />
 
     </RelativeLayout>

@@ -21,9 +21,8 @@ public class Peso extends SugarRecord {
     public Peso() {
     }
 
-    public Peso(long _id, float _valor, Date _dataPesagem) {
+    public Peso(float _valor, Date _dataPesagem) {
         super();
-        this.setID(_id);
         this.setValor(_valor);
         this.setDataPesagem(_dataPesagem);
     }
@@ -35,7 +34,6 @@ public class Peso extends SugarRecord {
     public void setID(long ID) {
         this.ID = ID;
     }
-
 
     public float getValor() {
         return Valor;

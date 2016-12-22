@@ -23,8 +23,7 @@ public class MaskDecimal implements TextWatcher {
     private DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
-    public void onTextChanged(CharSequence s, int start, int before,
-                              int after) {
+    public void onTextChanged(CharSequence s, int start, int before, int after) {
         // Evita que o método seja executado varias vezes.
         // Se tirar ele entre em loop
         if (isUpdating) {

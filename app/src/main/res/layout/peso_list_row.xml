@@ -16,7 +16,6 @@
             android:id="@+id/tv_peso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="text"
             android:text="Peso"
             android:textColor="#303030" />
@@ -25,9 +24,8 @@
             android:id="@+id/tv_data_pesagem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="text"
-            android:text="Data da pesagem"
+            android:text="Data da pesagem: 21/12/2016"
             android:textColor="#303030"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/tv_peso"

@@ -16,7 +16,6 @@
             android:id="@+id/tv_nome_categoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="text"
             android:text="Nome"
             android:textColor="#303030"

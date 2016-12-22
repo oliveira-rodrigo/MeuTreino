@@ -16,7 +16,6 @@
             android:id="@+id/nomeTreino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="text"
             android:text="Nome exercicio"
             android:textColor="#303030" />
@@ -25,7 +24,6 @@
             android:id="@+id/dtInicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="text"
             android:text="Data de início"
             android:textColor="#303030"
@@ -37,7 +35,6 @@
             android:id="@+id/dtFim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="text"
             android:text="Data de fim"
             android:textColor="#303030"

@@ -13,7 +13,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/nomeTreino"
+            android:id="@+id/tv_nome_treino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -21,26 +21,27 @@
             android:textColor="#303030" />
 
         <TextView
-            android:id="@+id/dtInicio"
+            android:id="@+id/tv_dt_inicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:text="Data de início"
             android:textColor="#303030"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/nomeTreino"
+            android:layout_below="@id/tv_nome_treino"
             android:layout_marginTop="10dp"/>
 
         <TextView
-            android:id="@+id/dtFim"
+            android:id="@+id/tv_dt_fim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:text="Data de fim"
             android:textColor="#303030"
-            android:layout_toRightOf="@id/dtInicio"
-            android:layout_below="@id/nomeTreino"
-            android:layout_marginTop="10dp"/>
+            android:layout_toRightOf="@id/tv_dt_inicio"
+            android:layout_below="@id/tv_nome_treino"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
 
         <ImageView
             android:id="@+id/item_remover"

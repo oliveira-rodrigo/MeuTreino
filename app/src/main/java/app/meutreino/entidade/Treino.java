@@ -23,9 +23,8 @@ public class Treino extends SugarRecord {
     public Treino() {
     }
 
-    public Treino(long _id, String _nome, Date _dataInicio, Date _dataFim) {
+    public Treino(String _nome, Date _dataInicio, Date _dataFim) {
         super();
-        this.setID(_id);
         this.setNome(_nome);
         this.setDataInicio(_dataInicio);
         this.setDataFim(_dataFim);

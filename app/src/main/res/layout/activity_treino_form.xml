@@ -13,37 +13,140 @@
         android:layout_margin="10dp"
         android:background="#FFF">
 
+        <TextView
+            android:id="@+id/tv_nome_treino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Nome do treino" />
+
         <EditText
             android:id="@+id/editNomeTreino"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_nome_treino"
             android:layout_margin="10dp"
-            android:background="@android:color/transparent"
-            android:backgroundTint="#202020"
+            android:background="@drawable/edittext_form_shape"
             android:hint="Nome do treino"
             android:padding="5dp" />
+
+        <TextView
+            android:id="@+id/tv_data_inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editNomeTreino"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Data início" />
 
         <EditText
             android:id="@+id/editDtInicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editNomeTreino"
+            android:layout_below="@id/tv_data_inicio"
             android:layout_margin="10dp"
-            android:background="@android:color/transparent"
-            app:backgroundTint="#202020"
+            android:background="@drawable/edittext_form_shape"
             android:hint="Data de início"
+            android:inputType="numberSigned"
             android:padding="5dp" />
+
+        <TextView
+            android:id="@+id/tv_data_fim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editDtInicio"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Data fim" />
 
         <EditText
             android:id="@+id/editDtFim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editDtInicio"
+            android:layout_below="@id/tv_data_fim"
             android:layout_margin="10dp"
-            android:background="@android:color/transparent"
-            app:backgroundTint="#202020"
+            android:background="@drawable/edittext_form_shape"
             android:hint="Data de fim"
+            android:inputType="numberSigned"
             android:padding="5dp" />
+
+        <TextView
+            android:id="@+id/tv_exercicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editDtFim"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Exercício" />
+
+        <Spinner
+            android:id="@+id/spinner_exercicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_exercicio"
+            android:layout_margin="10dp"
+            android:background="@drawable/edittext_form_shape"
+            android:padding="5dp"
+            android:prompt="@string/spinnerExercicioDefault" />
+
+        <TextView
+            android:id="@+id/tv_dia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner_exercicio"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Exercício" />
+
+        <Spinner
+            android:id="@+id/spinner_dia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_dia"
+            android:layout_margin="10dp"
+            android:background="@drawable/edittext_form_shape"
+            android:padding="5dp"
+            android:prompt="@string/spinnerExercicioDefault" />
+
+        <TextView
+            android:id="@+id/tv_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner_dia"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Séries" />
+
+        <EditText
+            android:id="@+id/edit_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_series"
+            android:layout_margin="10dp"
+            android:background="@drawable/edittext_form_shape"
+            android:hint="Séries"
+            android:padding="5dp" />
+
+        <TextView
+            android:id="@+id/tv_carga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_series"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Carga" />
+
+        <EditText
+            android:id="@+id/edit_carga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_carga"
+            android:layout_margin="10dp"
+            android:background="@drawable/edittext_form_shape"
+            android:hint="Carga"
+            android:padding="5dp"
+            android:inputType="number"/>
 
     </RelativeLayout>
 

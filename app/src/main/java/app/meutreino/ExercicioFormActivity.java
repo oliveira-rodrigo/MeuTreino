@@ -117,7 +117,7 @@ public class ExercicioFormActivity extends MainActivity implements Validator.Val
 
     private void carregarCategorias(){
 
-        List<Categoria> categorias = Categoria.listAll(Categoria.class);
+        List<Categoria> categorias = com.orm.query.Select.from(Categoria.class).orderBy("nome").list();
         List<String> arrayCategorias = new ArrayList<>();
 
         for (Categoria cat : categorias)

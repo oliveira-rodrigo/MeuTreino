@@ -8,12 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import app.meutreino.R;
 import app.meutreino.comum.RecyclerViewClickListener;
 import app.meutreino.entidade.Peso;
 import app.meutreino.entidade.Treino;
+import app.meutreino.entidade.TreinoExercicio;
 
 /**
  * Created by olive on 14/11/2016.
@@ -79,6 +82,14 @@ public class TreinoAdapter extends RecyclerView.Adapter<TreinoAdapter.MyViewHold
         holder.dtFim.setText(treino.getDataFim() != null ?
                 "Data de fim: " + new SimpleDateFormat("dd/MM/yyyy").format(treino.getDataFim()) :
                 "Data de fim:");
+
+        List<TreinoExercicio> lista = TreinoExercicio.find(TreinoExercicio.class, "TREINO = ?", treino.getId().toString());
+
+        holder.nomeTreino.append(" - ");
+
+        for(TreinoExercicio te: lista){
+            holder.nomeTreino.append(te.getExercicio().getNome() + "/");
+        }
     }
 
     @Override

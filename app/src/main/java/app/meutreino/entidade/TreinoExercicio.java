@@ -18,7 +18,7 @@ public class TreinoExercicio extends SugarRecord {
     //private long ExercicioID;
     private Exercicio Exercicio;
 
-    private long Dia;
+    private String Dia;
 
     private String Series;
 
@@ -27,9 +27,8 @@ public class TreinoExercicio extends SugarRecord {
     public TreinoExercicio() {
     }
 
-    public TreinoExercicio(long _id, Treino _treino, Exercicio _exercicio, long _dia, String _series, long _carga) {
+    public TreinoExercicio(Treino _treino, Exercicio _exercicio, String _dia, String _series, long _carga) {
         super();
-        this.setID(_id);
         this.setTreino(_treino);
         this.setExercicio(_exercicio);
         this.setDia(_dia);
@@ -61,11 +60,11 @@ public class TreinoExercicio extends SugarRecord {
         Exercicio = exercicio;
     }
 
-    public long getDia() {
+    public String getDia() {
         return Dia;
     }
 
-    public void setDia(long dia) {
+    public void setDia(String dia) {
         Dia = dia;
     }
 

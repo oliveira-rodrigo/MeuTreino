@@ -71,11 +71,32 @@
             android:inputType="numberSigned"
             android:padding="5dp" />
 
+        <View
+            android:id="@+id/exercicio_header_separator"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/editDtFim"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/cinza_escuro" />
+
+        <TextView
+            android:id="@+id/tv_exercicio_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exercicio_header_separator"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Exercícios"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tv_exercicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editDtFim"
+            android:layout_below="@id/tv_exercicio_header"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="Exercício" />
@@ -125,7 +146,7 @@
             android:layout_below="@id/tv_series"
             android:layout_margin="10dp"
             android:background="@drawable/edittext_form_shape"
-            android:hint="Séries"
+            android:hint="Ex: 12/10/8/6"
             android:padding="5dp" />
 
         <TextView
@@ -135,7 +156,7 @@
             android:layout_below="@id/edit_series"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="Carga" />
+            android:text="Carga em KG" />
 
         <EditText
             android:id="@+id/edit_carga"
@@ -145,8 +166,20 @@
             android:layout_margin="10dp"
             android:background="@drawable/edittext_form_shape"
             android:hint="Carga"
-            android:padding="5dp"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:padding="5dp" />
+
+        <Button
+            android:id="@+id/btn_adicionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_carga"
+            android:layout_margin="10dp"
+            android:background="@color/verde"
+            android:padding="7dp"
+            android:text="Adicionar"
+            android:textColor="@color/branco"
+            android:onClick="adicionarExercicio"/>
 
     </RelativeLayout>
 

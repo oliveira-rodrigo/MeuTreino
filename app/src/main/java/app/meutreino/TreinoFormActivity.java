@@ -13,7 +13,6 @@ import android.widget.Spinner;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
-import com.mobsandgeeks.saripaar.annotation.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +21,7 @@ import app.meutreino.comum.Mask;
 import app.meutreino.comum.Util;
 import app.meutreino.entidade.Exercicio;
 import app.meutreino.entidade.Treino;
+import app.meutreino.entidade.TreinoExercicio;
 
 public class TreinoFormActivity extends MainActivity implements Validator.ValidationListener {
 
@@ -29,10 +29,13 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
     EditText editNomeTreino, editDtInicio, editDtFim;
     Spinner spinnerExercicio;
     Spinner spinnerDia;
+    EditText editSeries, editCarga;
 
     Validator validator;
 
     FloatingActionButton fabCancelar, fabSalvar;
+
+    ArrayList<TreinoExercicio> listExerciciosTreino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,11 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
         spinnerDia = (Spinner) findViewById(R.id.spinner_dia);
         carregarDias();
 
+        editSeries = (EditText) findViewById(R.id.edit_series);
+        editCarga = (EditText) findViewById(R.id.edit_carga);
+
+        listExerciciosTreino = new ArrayList<TreinoExercicio>();
+
         validator = new Validator(this);
         validator.setValidationListener(this);
     }
@@ -92,6 +100,21 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
                     new Util().stringToDate(editDtInicio.getText().toString()),
                     new Util().stringToDate(editDtFim.getText().toString()));
             treino.save();
+
+            Treino savedTreino  = Treino.last(Treino.class);
+
+            if (listExerciciosTreino.size() > 0) {
+                for (TreinoExercicio te : listExerciciosTreino) {
+
+                    TreinoExercicio treinoExer =
+                            new TreinoExercicio(savedTreino, te.getExercicio(), te.getDia(), te.getSeries(), te.getCarga());
+
+                    treinoExer.save();
+                }
+            }
+
+            //listExerciciosTreino.clear();
+
             startActivity(new Intent(this, TreinoActivity.class));
         } catch (Exception e) {
             Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
@@ -120,7 +143,7 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
         }
     }
 
-    private void carregarExercicios(){
+    private void carregarExercicios() {
 
         List<Exercicio> exercicios = com.orm.query.Select.from(Exercicio.class).orderBy("nome").list();
         List<String> arrayExercicios = new ArrayList<>();
@@ -139,7 +162,7 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
         spinnerExercicio.setAdapter(dataAdapter);
     }
 
-    private void carregarDias(){
+    private void carregarDias() {
 
         List<String> arrayDias = new ArrayList<>();
         arrayDias.add("Todos");
@@ -158,6 +181,30 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
 
         // attaching data adapter to spinner
         spinnerDia.setAdapter(dataAdapter);
+    }
+
+    public void adicionarExercicio(View v) {
+
+        //Treino treino = new Treino("Teste", new Date(2016,12,01),  new Date(2016,12,31));
+
+        Exercicio exercicio = Exercicio
+                .find(Exercicio.class, "nome = ?",
+                        spinnerExercicio.getItemAtPosition(spinnerExercicio.getSelectedItemPosition()).toString()).get(0);
+
+        TreinoExercicio objTreinoExer = new TreinoExercicio();
+        objTreinoExer.setCarga(Long.parseLong(editCarga.getText().toString()));
+        objTreinoExer.setDia(spinnerDia.getItemAtPosition(spinnerDia.getSelectedItemPosition()).toString());
+        objTreinoExer.setExercicio(exercicio);
+        objTreinoExer.setSeries(editSeries.getText().toString());
+
+        //TreinoExercicio objTreinoExer = new TreinoExercicio(treino, exercicio,
+        //        Long.parseLong(spinnerDia.getItemAtPosition(spinnerDia.getSelectedItemPosition()).toString()),
+        //        editSeries.getText().toString(), Long.parseLong(editCarga.getText().toString()));
+
+        listExerciciosTreino.add(objTreinoExer);
+
+        Snackbar.make(v, "Exercício adicionado com sucesso!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 }
 

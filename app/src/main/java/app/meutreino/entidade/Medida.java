@@ -3,6 +3,8 @@ package app.meutreino.entidade;
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 
+import java.util.Date;
+
 /**
  * Created by olive on 16/11/2016.
  */
@@ -30,13 +32,14 @@ public class Medida extends SugarRecord {
 
     private long PanturrilhaEsq;
 
+    private Date DataMedicao;
+
     public Medida() {
     }
 
-    public Medida(long _id, long _bracoDir, long _bracoEsq, long _peitoral, long _cintura, long _quadril,
-                  long _coxaDir, long _coxaEsq, long _panturrilhaDir, long _panturrilhaEsq) {
+    public Medida(long _bracoDir, long _bracoEsq, long _peitoral, long _cintura, long _quadril,
+                  long _coxaDir, long _coxaEsq, long _panturrilhaDir, long _panturrilhaEsq, Date _dataMedicao) {
         super();
-        this.setID(_id);
         this.setBracoDir(_bracoDir);
         this.setBracoEsq(_bracoEsq);
         this.setPeitoral(_peitoral);
@@ -46,6 +49,7 @@ public class Medida extends SugarRecord {
         this.setCoxaEsq(_coxaEsq);
         this.setPanturilhaDir(_panturrilhaDir);
         this.setPanturrilhaEsq(_panturrilhaEsq);
+        this.setDataMedicao(_dataMedicao);
     }
 
     public long getID() {
@@ -126,5 +130,13 @@ public class Medida extends SugarRecord {
 
     public void setPanturrilhaEsq(long panturrilhaEsq) {
         PanturrilhaEsq = panturrilhaEsq;
+    }
+
+    public Date getDataMedicao() {
+        return DataMedicao;
+    }
+
+    public void setDataMedicao(Date dataMedicao) {
+        DataMedicao = dataMedicao;
     }
 }

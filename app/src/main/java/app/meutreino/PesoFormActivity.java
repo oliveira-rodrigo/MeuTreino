@@ -105,7 +105,7 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
     @Override
     protected void onResume() {
         super.onResume();
-        navigationView.getMenu().getItem(2).setChecked(true);
+        navigationView.getMenu().getItem(5).setChecked(true);
     }
 
     @Override

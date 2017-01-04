@@ -76,9 +76,9 @@
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_below="@id/editDtFim"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
             android:background="@color/cinza_escuro" />
 
         <TextView
@@ -176,10 +176,18 @@
             android:layout_below="@id/edit_carga"
             android:layout_margin="10dp"
             android:background="@color/verde"
+            android:onClick="adicionarExercicio"
             android:padding="7dp"
             android:text="Adicionar"
-            android:textColor="@color/branco"
-            android:onClick="adicionarExercicio"/>
+            android:textColor="@color/branco" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleLista"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/btn_adicionar"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/exercicio_list_row" />
 
     </RelativeLayout>
 

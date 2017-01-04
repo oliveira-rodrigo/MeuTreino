@@ -2,43 +2,42 @@ package app.meutreino;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
-import app.meutreino.adapter.CategoriaAdapter;
-import app.meutreino.adapter.PesoAdapter;
+import app.meutreino.adapter.ExercicioAdapter;
+import app.meutreino.adapter.MedidaAdapter;
 import app.meutreino.comum.RecyclerViewClickListener;
-import app.meutreino.entidade.Peso;
+import app.meutreino.entidade.Exercicio;
+import app.meutreino.entidade.Medida;
 
-public class PesoActivity extends MainActivity {
+public class MedidaActivity extends MainActivity {
 
     private RecyclerView recyclerView;
-    private PesoAdapter mAdapter;
+    private MedidaAdapter mAdapter;
     FloatingActionButton fabNovo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getLayoutInflater().inflate(R.layout.activity_peso, frameLayout);
+        getLayoutInflater().inflate(R.layout.activity_medida, frameLayout);
 
         fabNovo = (FloatingActionButton) findViewById(R.id.fab_novo);
         fabNovo.setBackgroundTintList(ColorStateList
                 .valueOf(getResources().getColor(R.color.azul)));
 
         // Setting title
-        setTitle("Pesos");
+        setTitle("Medidas");
 
+        //RecyclerView
         recyclerView = (RecyclerView) findViewById(R.id.recycleLista);
-
-        mAdapter = new PesoAdapter(Peso.listAll(Peso.class), new RecyclerViewClickListener() {
+        mAdapter = new MedidaAdapter(Medida.listAll(Medida.class), new RecyclerViewClickListener() {
             @Override
             public void onViewClicked(View v, int position) {
                 if(v.getId() == R.id.item_remover){
@@ -60,32 +59,12 @@ public class PesoActivity extends MainActivity {
     }
 
     public void abrirCadastro(View v) {
-        startActivity(new Intent(this, PesoFormActivity.class));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        startActivity(new Intent(this, MedidaFormActivity.class));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        navigationView.getMenu().getItem(4).setChecked(true);
+        navigationView.getMenu().getItem(5).setChecked(true);
     }
 }

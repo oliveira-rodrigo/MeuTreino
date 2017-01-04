@@ -8,13 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import app.meutreino.R;
 import app.meutreino.comum.RecyclerViewClickListener;
-import app.meutreino.entidade.Peso;
 import app.meutreino.entidade.Treino;
 import app.meutreino.entidade.TreinoExercicio;
 
@@ -22,23 +19,21 @@ import app.meutreino.entidade.TreinoExercicio;
  * Created by olive on 14/11/2016.
  */
 
-public class TreinoAdapter extends RecyclerView.Adapter<TreinoAdapter.MyViewHolder> {
+public class TreinoExercicioAdapter extends RecyclerView.Adapter<TreinoExercicioAdapter.MyViewHolder> {
 
     private RecyclerViewClickListener listener;
 
-    private List<Treino> list;
+    private List<TreinoExercicio> list;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView nomeTreino;
-        public TextView dtInicio;
-        public TextView dtFim;
+        public TextView nome, series, carga;
         public ImageView imgDeletar;
 
         public MyViewHolder(View view) {
             super(view);
-            nomeTreino = (TextView) view.findViewById(R.id.tv_nome_treino);
-            dtInicio = (TextView) view.findViewById(R.id.tv_dt_inicio);
-            dtFim = (TextView) view.findViewById(R.id.tv_dt_fim);
+            nome = (TextView) view.findViewById(R.id.tv_nome);
+            series = (TextView) view.findViewById(R.id.tv_series);
+            carga = (TextView) view.findViewById(R.id.tv_carga);
             imgDeletar = (ImageView) view.findViewById(R.id.item_remover);
 
             imgDeletar.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +54,7 @@ public class TreinoAdapter extends RecyclerView.Adapter<TreinoAdapter.MyViewHold
         }
     }
 
-    public TreinoAdapter(List<Treino> entidadesList, RecyclerViewClickListener listener) {
+    public TreinoExercicioAdapter(List<TreinoExercicio> entidadesList, RecyclerViewClickListener listener) {
         this.list = entidadesList;
         this.listener = listener;
     }
@@ -67,24 +62,17 @@ public class TreinoAdapter extends RecyclerView.Adapter<TreinoAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.treino_list_row, parent, false);
+                .inflate(R.layout.treino_exercicio_list_row, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Treino treino = list.get(position);
-        holder.nomeTreino.setText("Nome do treino: " + treino.getNome());
-        holder.dtInicio.setText(treino.getDataInicio() != null ?
-                "Data de início: " + new SimpleDateFormat("dd/MM/yyyy").format(treino.getDataInicio()) :
-                "Data de início:");
-        holder.dtFim.setText(treino.getDataFim() != null ?
-                "Data de fim: " + new SimpleDateFormat("dd/MM/yyyy").format(treino.getDataFim()) :
-                "Data de fim:");
-
-        long qtdeExercicios = TreinoExercicio.count(TreinoExercicio.class, "TREINO = ?", new String[]{treino.getId().toString()});
-        holder.nomeTreino.append(" ( " + qtdeExercicios + " Exercícios )");
+        TreinoExercicio treinoExercicio = list.get(position);
+        holder.nome.setText("Exercicio: " + treinoExercicio.getExercicio().getNome());
+        holder.series.setText("Séries: " + treinoExercicio.getSeries());
+        holder.carga.setText("Carga: " + treinoExercicio.getCarga());
     }
 
     @Override

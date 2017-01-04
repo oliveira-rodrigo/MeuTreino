@@ -5,6 +5,9 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -17,7 +20,9 @@ import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.meutreino.adapter.TreinoExercicioAdapter;
 import app.meutreino.comum.Mask;
+import app.meutreino.comum.RecyclerViewClickListener;
 import app.meutreino.comum.Util;
 import app.meutreino.entidade.Exercicio;
 import app.meutreino.entidade.Treino;
@@ -34,6 +39,9 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
     Validator validator;
 
     FloatingActionButton fabCancelar, fabSalvar;
+
+    RecyclerView recycleLista;
+    private TreinoExercicioAdapter mAdapter;
 
     ArrayList<TreinoExercicio> listExerciciosTreino;
 
@@ -73,6 +81,7 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
         editCarga = (EditText) findViewById(R.id.edit_carga);
 
         listExerciciosTreino = new ArrayList<TreinoExercicio>();
+        recycleLista = (RecyclerView) findViewById(R.id.recycleLista);
 
         validator = new Validator(this);
         validator.setValidationListener(this);
@@ -101,7 +110,7 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
                     new Util().stringToDate(editDtFim.getText().toString()));
             treino.save();
 
-            Treino savedTreino  = Treino.last(Treino.class);
+            Treino savedTreino = Treino.last(Treino.class);
 
             if (listExerciciosTreino.size() > 0) {
                 for (TreinoExercicio te : listExerciciosTreino) {
@@ -185,8 +194,6 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
 
     public void adicionarExercicio(View v) {
 
-        //Treino treino = new Treino("Teste", new Date(2016,12,01),  new Date(2016,12,31));
-
         Exercicio exercicio = Exercicio
                 .find(Exercicio.class, "nome = ?",
                         spinnerExercicio.getItemAtPosition(spinnerExercicio.getSelectedItemPosition()).toString()).get(0);
@@ -197,14 +204,46 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
         objTreinoExer.setExercicio(exercicio);
         objTreinoExer.setSeries(editSeries.getText().toString());
 
-        //TreinoExercicio objTreinoExer = new TreinoExercicio(treino, exercicio,
-        //        Long.parseLong(spinnerDia.getItemAtPosition(spinnerDia.getSelectedItemPosition()).toString()),
-        //        editSeries.getText().toString(), Long.parseLong(editCarga.getText().toString()));
-
         listExerciciosTreino.add(objTreinoExer);
+
+        carregarListaExercicios();
+
+        limparCampos();
 
         Snackbar.make(v, "Exercício adicionado com sucesso!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+    }
+
+    public void carregarListaExercicios() {
+        if (listExerciciosTreino.size() > 0) {
+            mAdapter = new TreinoExercicioAdapter(listExerciciosTreino, new RecyclerViewClickListener() {
+                @Override
+                public void onViewClicked(View v, int position) {
+                    if(v.getId() == R.id.item_remover){
+                        Snackbar.make(fabSalvar, "Remover item", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                }
+
+                @Override
+                public void onRowClicked(int position) {
+                    Snackbar.make(fabSalvar, "Detalhe item", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            });
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+            recycleLista.setLayoutManager(mLayoutManager);
+            recycleLista.setItemAnimator(new DefaultItemAnimator());
+            recycleLista.setAdapter(mAdapter);
+        }
+    }
+
+    public void limparCampos()
+    {
+        spinnerExercicio.setSelection(0);
+        editCarga.setText("");
+        spinnerDia.setSelection(0);
+        editSeries.setText("");
     }
 }
 

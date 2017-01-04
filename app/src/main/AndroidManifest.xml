@@ -48,6 +48,8 @@
         <activity android:name=".TreinoFormActivity" />
         <activity android:name=".PesoActivity" />
         <activity android:name=".PesoFormActivity"></activity>
+        <activity android:name=".MedidaActivity" />
+        <activity android:name=".MedidaFormActivity" />
     </application>
 
 </manifest>

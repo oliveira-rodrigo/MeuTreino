@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_categoria_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="app.meutreino.MedidaFormActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <!--braços-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_braco_esq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Braço esq" />
+
+            <TextView
+                android:id="@+id/tv_braco_dir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tv_braco_esq"
+                android:layout_weight="1"
+                android:text="Braço dir" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editBracoEsq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_braco_esq"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_form_shape"
+                android:hint="Braço esq"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/editBracoDir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_braco_dir"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/editBracoEsq"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_form_shape"
+                android:hint="Braço dir"
+                android:padding="5dp" />
+
+        </LinearLayout>
+
+        <!--coxas-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_coxa_esq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Coxa esq" />
+
+            <TextView
+                android:id="@+id/tv_coxa_dir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tv_braco_esq"
+                android:layout_weight="1"
+                android:text="Coxa dir" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editCoxaEsq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_coxa_esq"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_form_shape"
+                android:hint="Coxa esq"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/editCoxaDir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_coxa_dir"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/editCoxaEsq"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_form_shape"
+                android:hint="Coxa dir"
+                android:padding="5dp" />
+
+        </LinearLayout>
+
+        <!--panturrilhas-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_panturrilha_esq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Panturrilha esq" />
+
+            <TextView
+                android:id="@+id/tv_panturrilha_dir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tv_braco_esq"
+                android:layout_weight="1"
+                android:text="Panturrilha dir" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editPanturrilhaEsq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_panturrilha_esq"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_form_shape"
+                android:hint="Panturrilha esq"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/editPanturrilhaDir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_panturrilha_dir"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/editPanturrilhaEsq"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_form_shape"
+                android:hint="Panturrilha dir"
+                android:padding="5dp" />
+
+        </LinearLayout>
+
+        <!--peitoral quadril, cintura-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_peitoral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Peitoral" />
+
+            <TextView
+                android:id="@+id/tv_quadril"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tv_peitoral"
+                android:layout_weight="1"
+                android:text="Quadril" />
+
+            <TextView
+                android:id="@+id/tv_cintura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tv_quadril"
+                android:layout_weight="1"
+                android:text="Cintura" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editPeitoral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_peitoral"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_form_shape"
+                android:hint="Peitoral"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/editQuadril"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_quadril"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/editPeitoral"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_form_shape"
+                android:hint="Quadril"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/editCintura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_cintura"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/editQuadril"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_form_shape"
+                android:hint="Quadril"
+                android:padding="5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@color/vermelho"
+        android:onClick="cancelar"
+        android:tint="#fff"
+        app:backgroundTint="@color/vermelho"
+        app:fab_colorNormal="@color/vermelho"
+        app:srcCompat="@drawable/ic_cancel_black_48dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabSalvar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@color/verde"
+        android:onClick="salvar"
+        android:tint="#fff"
+        app:backgroundTint="@color/verde"
+        app:fab_colorNormal="@color/verde"
+        app:srcCompat="@drawable/ic_save_black_48dp" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -22,6 +22,7 @@ public class CategoriaActivity extends MainActivity {
 
     private RecyclerView recyclerView;
     private CategoriaAdapter mAdapter;
+    private List<Categoria> categorias;
     FloatingActionButton fabNovo;
 
     @Override
@@ -39,21 +40,35 @@ public class CategoriaActivity extends MainActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycleLista);
 
-        mAdapter = new CategoriaAdapter(Categoria.listAll(Categoria.class), new RecyclerViewClickListener() {
+        categorias = Categoria.listAll(Categoria.class);
+        mAdapter = new CategoriaAdapter(categorias, new RecyclerViewClickListener() {
             @Override
             public void onViewClicked(View v, int position) {
-                if(v.getId() == R.id.item_remover){
+                if (v.getId() == R.id.item_remover) {
                     Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+
+                    Categoria categoria = Categoria.findById(Categoria.class, categorias.get(position).getId());
+                    categoria.delete();
+
+                    categorias.remove(position);
+                    recyclerView.removeViewAt(position);
+                    mAdapter.notifyItemRemoved(position);
+                    mAdapter.notifyItemRangeChanged(position, categorias.size());
                 }
             }
 
             @Override
             public void onRowClicked(int position) {
-                Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
+                Snackbar.make(fabNovo, "Detalhe item " + categorias.get(position).getId(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                Intent intent = new Intent(getApplicationContext(), CategoriaFormActivity.class);
+                intent.putExtra("CategoriaID", categorias.get(position).getId());
+                startActivity(intent);
             }
         });
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

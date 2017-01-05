@@ -1,12 +1,15 @@
 package app.meutreino;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
@@ -24,6 +27,8 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
     Validator validator;
 
     FloatingActionButton fabCancelar, fabSalvar;
+
+    int categoriaID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,18 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
 
         editText = (EditText) findViewById(R.id.editTextNome);
 
+        if (getIntent().hasExtra("CategoriaID")) {
+            categoriaID = Integer.parseInt(getIntent().getSerializableExtra("CategoriaID").toString());
+            if (categoriaID > 0) {
+                Snackbar.make(fabSalvar, "Carregar dados para edição " + categoriaID, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                // Setting title
+                setTitle("Editar categoria");
+                carregarDados();
+            }
+        }
+
         validator = new Validator(this);
         validator.setValidationListener(this);
     }
@@ -53,6 +70,7 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
     }
 
     public void cancelar(View v) {
+
         startActivity(new Intent(this, CategoriaActivity.class));
     }
 
@@ -66,8 +84,14 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
     public void onValidationSucceeded() {
         // a validação passou , siga em frente
         try {
-            Categoria categoria = new Categoria(editText.getText().toString().trim(), true);
-            categoria.save();
+            if (categoriaID > 0) {
+                Categoria categoria = Categoria.findById(Categoria.class, categoriaID);
+                categoria.setNome(editText.getText().toString().trim());
+                categoria.save();
+            } else {
+                Categoria categoria = new Categoria(editText.getText().toString().trim(), true);
+                categoria.save();
+            }
             startActivity(new Intent(this, CategoriaActivity.class));
         } catch (Exception e) {
             Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
@@ -94,5 +118,10 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
                         .setAction("Action", null).show();
             }
         }
+    }
+
+    public void carregarDados() {
+        Categoria categoria = Categoria.findById(Categoria.class, categoriaID);
+        editText.setText(categoria.getNome());
     }
 }

@@ -10,9 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.util.List;
+
 import app.meutreino.adapter.ExercicioAdapter;
 import app.meutreino.adapter.MedidaAdapter;
 import app.meutreino.comum.RecyclerViewClickListener;
+import app.meutreino.entidade.Categoria;
 import app.meutreino.entidade.Exercicio;
 import app.meutreino.entidade.Medida;
 
@@ -20,6 +23,7 @@ public class MedidaActivity extends MainActivity {
 
     private RecyclerView recyclerView;
     private MedidaAdapter mAdapter;
+    private List<Medida> medidas;
     FloatingActionButton fabNovo;
 
     @Override
@@ -37,12 +41,26 @@ public class MedidaActivity extends MainActivity {
 
         //RecyclerView
         recyclerView = (RecyclerView) findViewById(R.id.recycleLista);
-        mAdapter = new MedidaAdapter(Medida.listAll(Medida.class), new RecyclerViewClickListener() {
+        medidas = Medida.listAll(Medida.class);
+        mAdapter = new MedidaAdapter(medidas, new RecyclerViewClickListener() {
             @Override
             public void onViewClicked(View v, int position) {
                 if(v.getId() == R.id.item_remover){
                     Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+
+                    try {
+                        Medida medida = Medida.findById(Medida.class, medidas.get(position).getId());
+                        medida.delete();
+
+                        medidas.remove(position);
+                        recyclerView.removeViewAt(position);
+                        mAdapter.notifyItemRemoved(position);
+                        mAdapter.notifyItemRangeChanged(position, medidas.size());
+                    } catch (Exception ex) {
+                        Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
                 }
             }
 

@@ -12,15 +12,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.List;
+
 import app.meutreino.adapter.CategoriaAdapter;
 import app.meutreino.adapter.PesoAdapter;
 import app.meutreino.comum.RecyclerViewClickListener;
+import app.meutreino.entidade.Exercicio;
+import app.meutreino.entidade.Medida;
 import app.meutreino.entidade.Peso;
 
 public class PesoActivity extends MainActivity {
 
     private RecyclerView recyclerView;
     private PesoAdapter mAdapter;
+    private List<Peso> pesos;
     FloatingActionButton fabNovo;
 
     @Override
@@ -37,13 +42,26 @@ public class PesoActivity extends MainActivity {
         setTitle("Pesos");
 
         recyclerView = (RecyclerView) findViewById(R.id.recycleLista);
-
-        mAdapter = new PesoAdapter(Peso.listAll(Peso.class), new RecyclerViewClickListener() {
+        pesos = Peso.listAll(Peso.class);
+        mAdapter = new PesoAdapter(pesos, new RecyclerViewClickListener() {
             @Override
             public void onViewClicked(View v, int position) {
                 if(v.getId() == R.id.item_remover){
                     Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+
+                    try {
+                        Peso peso = Peso.findById(Peso.class, pesos.get(position).getId());
+                        peso.delete();
+
+                        pesos.remove(position);
+                        recyclerView.removeViewAt(position);
+                        mAdapter.notifyItemRemoved(position);
+                        mAdapter.notifyItemRangeChanged(position, pesos.size());
+                    } catch (Exception ex) {
+                        Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
                 }
             }
 

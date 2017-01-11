@@ -48,13 +48,18 @@ public class CategoriaActivity extends MainActivity {
                     Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
-                    Categoria categoria = Categoria.findById(Categoria.class, categorias.get(position).getId());
-                    categoria.delete();
+                    try {
+                        Categoria categoria = Categoria.findById(Categoria.class, categorias.get(position).getId());
+                        categoria.delete();
 
-                    categorias.remove(position);
-                    recyclerView.removeViewAt(position);
-                    mAdapter.notifyItemRemoved(position);
-                    mAdapter.notifyItemRangeChanged(position, categorias.size());
+                        categorias.remove(position);
+                        recyclerView.removeViewAt(position);
+                        mAdapter.notifyItemRemoved(position);
+                        mAdapter.notifyItemRangeChanged(position, categorias.size());
+                    } catch (Exception ex) {
+                        Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
                 }
             }
 

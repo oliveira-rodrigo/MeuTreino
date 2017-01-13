@@ -17,6 +17,7 @@ import java.util.List;
 import app.meutreino.adapter.TreinoAdapter;
 import app.meutreino.comum.RecyclerViewClickListener;
 import app.meutreino.entidade.Treino;
+import app.meutreino.entidade.TreinoExercicio;
 
 public class TreinoActivity extends MainActivity {
 
@@ -49,12 +50,20 @@ public class TreinoActivity extends MainActivity {
 
                     try {
                         Treino treino = Treino.findById(Treino.class, treinos.get(position).getId());
-                        treino.delete();
 
-                        treinos.remove(position);
-                        recyclerView.removeViewAt(position);
-                        mAdapter.notifyItemRemoved(position);
-                        mAdapter.notifyItemRangeChanged(position, treinos.size());
+                        long qtde = TreinoExercicio.count(TreinoExercicio.class, "Treino = ?", new String[]{treino.getId().toString()});
+
+                        if (qtde == 0) {
+                            treino.delete();
+
+                            treinos.remove(position);
+                            recyclerView.removeViewAt(position);
+                            mAdapter.notifyItemRemoved(position);
+                            mAdapter.notifyItemRangeChanged(position, treinos.size());
+                        } else {
+                            Snackbar.make(fabNovo, "Esse treino não pode ser removido. Existem exercícios vinculados a ele.", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
                     } catch (Exception ex) {
                         Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();

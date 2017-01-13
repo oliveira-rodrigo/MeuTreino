@@ -15,6 +15,7 @@ import java.util.List;
 import app.meutreino.adapter.ExercicioAdapter;
 import app.meutreino.comum.RecyclerViewClickListener;
 import app.meutreino.entidade.Exercicio;
+import app.meutreino.entidade.TreinoExercicio;
 
 public class ExercicioActivity extends MainActivity {
 
@@ -48,12 +49,20 @@ public class ExercicioActivity extends MainActivity {
 
                     try {
                         Exercicio exercicio = Exercicio.findById(Exercicio.class, exercicios.get(position).getId());
-                        exercicio.delete();
 
-                        exercicios.remove(position);
-                        recyclerView.removeViewAt(position);
-                        mAdapter.notifyItemRemoved(position);
-                        mAdapter.notifyItemRangeChanged(position, exercicios.size());
+                        long qtde = TreinoExercicio.count(TreinoExercicio.class, "Exercicio = ?", new String[]{exercicio.getId().toString()});
+
+                        if (qtde == 0) {
+                            exercicio.delete();
+
+                            exercicios.remove(position);
+                            recyclerView.removeViewAt(position);
+                            mAdapter.notifyItemRemoved(position);
+                            mAdapter.notifyItemRangeChanged(position, exercicios.size());
+                        } else {
+                            Snackbar.make(fabNovo, "Esse exercício não pode ser removido. Existem treinos vinculados a ele.", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
                     } catch (Exception ex) {
                         Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
@@ -65,6 +74,10 @@ public class ExercicioActivity extends MainActivity {
             public void onRowClicked(int position) {
                 Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                Intent intent = new Intent(getApplicationContext(), ExercicioFormActivity.class);
+                intent.putExtra("ExercicioID", exercicios.get(position).getId());
+                startActivity(intent);
             }
         });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

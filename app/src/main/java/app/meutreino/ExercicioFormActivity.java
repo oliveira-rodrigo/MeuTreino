@@ -33,6 +33,8 @@ public class ExercicioFormActivity extends MainActivity implements Validator.Val
 
     FloatingActionButton fabCancelar, fabSalvar;
 
+    int exercicioID = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,18 @@ public class ExercicioFormActivity extends MainActivity implements Validator.Val
         carregarCategorias();
         spinnerCategoria.setPrompt("Categoria");
 
+        if (getIntent().hasExtra("ExercicioID")) {
+            exercicioID = Integer.parseInt(getIntent().getSerializableExtra("ExercicioID").toString());
+            if (exercicioID > 0) {
+                Snackbar.make(fabSalvar, "Carregar dados para edição " + exercicioID, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                // Setting title
+                setTitle("Editar exercício");
+                carregarDados();
+            }
+        }
+
         validator = new Validator(this);
         validator.setValidationListener(this);
     }
@@ -78,13 +92,20 @@ public class ExercicioFormActivity extends MainActivity implements Validator.Val
     public void onValidationSucceeded() {
         // a validação passou , siga em frente
         try {
-            String text = spinnerCategoria.getSelectedItem().toString();
 
+            String text = spinnerCategoria.getSelectedItem().toString();
             Categoria categoria = Categoria
                     .find(Categoria.class, "nome = ?", text).get(0);
 
-            Exercicio exercicio = new Exercicio(categoria, etNomeExercicio.getText().toString(), true);
-            exercicio.save();
+            if (exercicioID > 0) {
+                Exercicio exercicio = Exercicio.findById(Exercicio.class, exercicioID);
+                exercicio.setNome(etNomeExercicio.getText().toString().trim());
+                exercicio.setCategoria(categoria);
+                exercicio.save();
+            } else {
+                Exercicio exercicio = new Exercicio(categoria, etNomeExercicio.getText().toString(), true);
+                exercicio.save();
+            }
 
             startActivity(new Intent(this, ExercicioActivity.class));
 
@@ -132,5 +153,17 @@ public class ExercicioFormActivity extends MainActivity implements Validator.Val
 
         // attaching data adapter to spinner
         spinnerCategoria.setAdapter(dataAdapter);
+    }
+
+    public void carregarDados() {
+        Exercicio exercicio = Exercicio.findById(Exercicio.class, exercicioID);
+        etNomeExercicio.setText(exercicio.getNome());
+
+        for (int i = 0; i < spinnerCategoria.getCount(); i++) {
+            if (spinnerCategoria.getItemAtPosition(i).equals(exercicio.getCategoria().getNome())) {
+                spinnerCategoria.setSelection(i);
+                break;
+            }
+        }
     }
 }

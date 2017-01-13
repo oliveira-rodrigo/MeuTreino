@@ -17,6 +17,7 @@ import java.util.List;
 import app.meutreino.adapter.CategoriaAdapter;
 import app.meutreino.comum.RecyclerViewClickListener;
 import app.meutreino.entidade.Categoria;
+import app.meutreino.entidade.Exercicio;
 
 public class CategoriaActivity extends MainActivity {
 
@@ -49,13 +50,23 @@ public class CategoriaActivity extends MainActivity {
                             .setAction("Action", null).show();
 
                     try {
-                        Categoria categoria = Categoria.findById(Categoria.class, categorias.get(position).getId());
-                        categoria.delete();
 
-                        categorias.remove(position);
-                        recyclerView.removeViewAt(position);
-                        mAdapter.notifyItemRemoved(position);
-                        mAdapter.notifyItemRangeChanged(position, categorias.size());
+                        Categoria categoria = Categoria.findById(Categoria.class, categorias.get(position).getId());
+
+                        long qtde = Exercicio.count(Exercicio.class, "Categoria = ?", new String[]{categoria.getId().toString()});
+                        //Snackbar.make(fabNovo, String.valueOf(qtdeExercicios), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                        if (qtde == 0) {
+                            categoria.delete();
+
+                            categorias.remove(position);
+                            recyclerView.removeViewAt(position);
+                            mAdapter.notifyItemRemoved(position);
+                            mAdapter.notifyItemRangeChanged(position, categorias.size());
+                        } else {
+                            Snackbar.make(fabNovo, "Essa categoria não pode ser removida. Existem exercícios vinculadas a ela.", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
                     } catch (Exception ex) {
                         Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();

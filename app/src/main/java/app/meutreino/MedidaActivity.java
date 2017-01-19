@@ -68,6 +68,10 @@ public class MedidaActivity extends MainActivity {
             public void onRowClicked(int position) {
                 Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                Intent intent = new Intent(getApplicationContext(), MedidaFormActivity.class);
+                intent.putExtra("MedidaID", medidas.get(position).getId());
+                startActivity(intent);
             }
         });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

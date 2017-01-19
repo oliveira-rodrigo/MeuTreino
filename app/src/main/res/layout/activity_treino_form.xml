@@ -118,7 +118,7 @@
             android:layout_below="@id/spinner_exercicio"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="Exercício" />
+            android:text="Dia" />
 
         <Spinner
             android:id="@+id/spinner_dia"
@@ -128,7 +128,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/edittext_form_shape"
             android:padding="5dp"
-            android:prompt="@string/spinnerExercicioDefault" />
+            android:prompt="@string/spinnerDiaDefault" />
 
         <TextView
             android:id="@+id/tv_series"

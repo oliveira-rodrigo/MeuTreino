@@ -2,10 +2,9 @@ package app.meutreino;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.method.DigitsKeyListener;
@@ -16,17 +15,9 @@ import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 import app.meutreino.comum.Mask;
-import app.meutreino.comum.MaskDecimal;
-import app.meutreino.comum.MaskMoney;
 import app.meutreino.comum.Util;
 import app.meutreino.entidade.Peso;
 
@@ -38,6 +29,8 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
     Validator validator;
 
     FloatingActionButton fabCancelar, fabSalvar;
+
+    int pesoID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,37 +50,21 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
         setTitle("Cadastro de peso");
 
         editPeso = (EditText) findViewById(R.id.editPeso);
-        //editPeso.addTextChangedListener(new MaskDecimal(editPeso));
-        editPeso.setFilters(new InputFilter[] {
-                new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
-                    int beforeDecimal = 5, afterDecimal = 3;
-
-                    @Override
-                    public CharSequence filter(CharSequence source, int start, int end,
-                                               Spanned dest, int dstart, int dend) {
-                        String temp = editPeso.getText() + source.toString();
-
-                        if (temp.equals(".")) {
-                            return "0.";
-                        }
-                        else if (temp.toString().indexOf(".") == -1) {
-                            // no decimal point placed yet
-                            if (temp.length() > beforeDecimal) {
-                                return "";
-                            }
-                        } else {
-                            temp = temp.substring(temp.indexOf(".") + 1);
-                            if (temp.length() > afterDecimal) {
-                                return "";
-                            }
-                        }
-
-                        return super.filter(source, start, end, dest, dstart, dend);
-                    }
-                }
-        });
-
         editDtPesagem = (EditText) findViewById(R.id.editDtPesagem);
+
+        if (getIntent().hasExtra("PesoID")) {
+            pesoID = Integer.parseInt(getIntent().getSerializableExtra("PesoID").toString());
+            if (pesoID > 0) {
+                Snackbar.make(fabSalvar, "Carregar dados para edição " + pesoID, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                // Setting title
+                setTitle("Editar peso");
+                carregarDados();
+            }
+        }
+
+        //mascaras
         editDtPesagem.addTextChangedListener(Mask.insert("##/##/####", editDtPesagem));
 
         validator = new Validator(this);
@@ -112,7 +89,17 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
     public void onValidationSucceeded() {
         // a validação passou , siga em frente
         try {
-            Peso peso = new Peso(Float.valueOf(editPeso.getText().toString()), new Util().stringToDate(editDtPesagem.getText().toString()));
+
+            Peso peso;
+
+            if (pesoID > 0) {
+                peso = Peso.findById(Peso.class, pesoID);
+                peso.setValor(Float.valueOf(editPeso.getText().toString()));
+                peso.setDataPesagem(new Util().stringToDate(editDtPesagem.getText().toString()));
+            } else {
+                peso = new Peso(Float.valueOf(editPeso.getText().toString()), new Util().stringToDate(editDtPesagem.getText().toString()));
+                peso.save();
+            }
             peso.save();
             startActivity(new Intent(this, PesoActivity.class));
         } catch (Exception e) {
@@ -140,5 +127,11 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
                         .setAction("Action", null).show();
             }
         }
+    }
+
+    public void carregarDados() {
+        Peso peso = Peso.findById(Peso.class, pesoID);
+        editPeso.setText(String.valueOf(peso.getValor()));
+        editDtPesagem.setText(new Util().dateToString(peso.getDataPesagem()));
     }
 }

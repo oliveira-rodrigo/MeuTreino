@@ -12,23 +12,23 @@ import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
-import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import app.meutreino.entidade.Categoria;
 import app.meutreino.entidade.Medida;
 
 public class MedidaFormActivity extends MainActivity implements Validator.ValidationListener {
 
     @NotEmpty(message = "Campo obrigatório")
-    EditText editBracoEsq, editBracoDir, editCoxaEsq, editCoxaDir,editPanturrilhaEsq, editPanturrilhaDir,
-             editPeitoral, editQuadril,editCintura;
+    EditText editBracoEsq, editBracoDir, editCoxaEsq, editCoxaDir, editPanturrilhaEsq, editPanturrilhaDir,
+            editPeitoral, editQuadril, editCintura;
 
     Validator validator;
 
     FloatingActionButton fabCancelar, fabSalvar;
+
+    int medidaID = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,18 @@ public class MedidaFormActivity extends MainActivity implements Validator.Valida
         editQuadril = (EditText) findViewById(R.id.editQuadril);
         editCintura = (EditText) findViewById(R.id.editCintura);
 
+        if (getIntent().hasExtra("MedidaID")) {
+            medidaID = Integer.parseInt(getIntent().getSerializableExtra("MedidaID").toString());
+            if (medidaID > 0) {
+                Snackbar.make(fabSalvar, "Carregar dados para edição " + medidaID, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                // Setting title
+                setTitle("Editar medidas");
+                carregarDados();
+            }
+        }
+
         validator = new Validator(this);
         validator.setValidationListener(this);
     }
@@ -79,7 +91,16 @@ public class MedidaFormActivity extends MainActivity implements Validator.Valida
     public void onValidationSucceeded() {
         // a validação passou , siga em frente
         try {
-            Medida medida = new Medida();
+
+            Medida medida;
+
+            if (medidaID > 0) {
+                medida = Medida.findById(Medida.class, medidaID);
+            } else {
+                medida = new Medida();
+                medida.setDataMedicao(new Date());
+            }
+
             medida.setBracoEsq(Long.parseLong(editBracoEsq.getText().toString()));
             medida.setBracoDir(Long.parseLong(editBracoDir.getText().toString()));
             medida.setCoxaEsq(Long.parseLong(editCoxaEsq.getText().toString()));
@@ -89,8 +110,8 @@ public class MedidaFormActivity extends MainActivity implements Validator.Valida
             medida.setPeitoral(Long.parseLong(editPeitoral.getText().toString()));
             medida.setQuadril(Long.parseLong(editQuadril.getText().toString()));
             medida.setCintura(Long.parseLong(editCintura.getText().toString()));
-            medida.setDataMedicao(new Date());
             medida.save();
+
             startActivity(new Intent(this, MedidaActivity.class));
         } catch (Exception e) {
             Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
@@ -117,5 +138,18 @@ public class MedidaFormActivity extends MainActivity implements Validator.Valida
                         .setAction("Action", null).show();
             }
         }
+    }
+
+    public void carregarDados() {
+        Medida medida = Medida.findById(Medida.class, medidaID);
+        editBracoEsq.setText(String.valueOf(medida.getBracoEsq()));
+        editBracoDir.setText(String.valueOf(medida.getBracoDir()));
+        editCoxaEsq.setText(String.valueOf(medida.getCoxaEsq()));
+        editCoxaDir.setText(String.valueOf(medida.getCoxaDir()));
+        editPanturrilhaEsq.setText(String.valueOf(medida.getPanturrilhaEsq()));
+        editPanturrilhaDir.setText(String.valueOf(medida.getPanturilhaDir()));
+        editPeitoral.setText(String.valueOf(medida.getPeitoral()));
+        editQuadril.setText(String.valueOf(medida.getQuadril()));
+        editCintura.setText(String.valueOf(medida.getCintura()));
     }
 }

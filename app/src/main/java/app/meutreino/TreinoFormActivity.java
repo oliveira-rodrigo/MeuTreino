@@ -45,6 +45,8 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
 
     ArrayList<TreinoExercicio> listExerciciosTreino;
 
+    int treinoID = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +67,8 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
         editNomeTreino = (EditText) findViewById(R.id.editNomeTreino);
 
         editDtInicio = (EditText) findViewById(R.id.editDtInicio);
-        editDtInicio.addTextChangedListener(Mask.insert("##/##/####", editDtInicio));
 
         editDtFim = (EditText) findViewById(R.id.editDtFim);
-        editDtFim.addTextChangedListener(Mask.insert("##/##/####", editDtFim));
 
         spinnerExercicio = (Spinner) findViewById(R.id.spinner_exercicio);
         carregarExercicios();
@@ -82,6 +82,22 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
 
         listExerciciosTreino = new ArrayList<TreinoExercicio>();
         recycleLista = (RecyclerView) findViewById(R.id.recycleLista);
+
+        if (getIntent().hasExtra("TreinoID")) {
+            treinoID = Integer.parseInt(getIntent().getSerializableExtra("TreinoID").toString());
+            if (treinoID > 0) {
+                Snackbar.make(fabSalvar, "Carregar dados para edição " + treinoID, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                // Setting title
+                setTitle("Editar treino");
+                carregarDados();
+            }
+        }
+
+        //mascaras
+        editDtInicio.addTextChangedListener(Mask.insert("##/##/####", editDtInicio));
+        editDtFim.addTextChangedListener(Mask.insert("##/##/####", editDtFim));
 
         validator = new Validator(this);
         validator.setValidationListener(this);
@@ -105,12 +121,25 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
     public void onValidationSucceeded() {
         // a validação passou , siga em frente
         try {
-            Treino treino = new Treino(editNomeTreino.getText().toString().trim(),
-                    new Util().stringToDate(editDtInicio.getText().toString()),
-                    new Util().stringToDate(editDtFim.getText().toString()));
-            treino.save();
 
-            Treino savedTreino = Treino.last(Treino.class);
+            Treino treino;
+            Treino savedTreino;
+
+            if (treinoID > 0) {
+                treino = Treino.findById(Treino.class, treinoID);
+                treino.setNome(editNomeTreino.getText().toString().trim());
+                treino.setDataInicio(new Util().stringToDate(editDtInicio.getText().toString()));
+                treino.setDataFim(new Util().stringToDate(editDtFim.getText().toString()));
+            } else {
+                treino = new Treino(editNomeTreino.getText().toString().trim(),
+                        new Util().stringToDate(editDtInicio.getText().toString()),
+                        new Util().stringToDate(editDtFim.getText().toString()));
+            }
+
+            treino.save();
+            savedTreino = treino;
+
+            TreinoExercicio.deleteAll(TreinoExercicio.class,  "TREINO = ?", new String[]{savedTreino.getId().toString()});
 
             if (listExerciciosTreino.size() > 0) {
                 for (TreinoExercicio te : listExerciciosTreino) {
@@ -121,8 +150,6 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
                     treinoExer.save();
                 }
             }
-
-            //listExerciciosTreino.clear();
 
             startActivity(new Intent(this, TreinoActivity.class));
         } catch (Exception e) {
@@ -219,7 +246,7 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
             mAdapter = new TreinoExercicioAdapter(listExerciciosTreino, new RecyclerViewClickListener() {
                 @Override
                 public void onViewClicked(View v, int position) {
-                    if(v.getId() == R.id.item_remover){
+                    if (v.getId() == R.id.item_remover) {
                         Snackbar.make(fabSalvar, "Remover item", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
@@ -238,12 +265,23 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
         }
     }
 
-    public void limparCampos()
-    {
+    public void limparCampos() {
         spinnerExercicio.setSelection(0);
         editCarga.setText("");
         spinnerDia.setSelection(0);
         editSeries.setText("");
+    }
+
+    public void carregarDados() {
+        Treino treino = Treino.findById(Treino.class, treinoID);
+        editNomeTreino.setText(treino.getNome());
+        editDtInicio.setText(new Util().dateToString(treino.getDataInicio()));
+        editDtFim.setText(new Util().dateToString(treino.getDataFim()));
+
+        listExerciciosTreino.addAll(TreinoExercicio.find(TreinoExercicio.class, "TREINO = ?", new String[]{treino.getId().toString()}));
+        carregarListaExercicios();
+
+        limparCampos();
     }
 }
 

@@ -69,6 +69,10 @@ public class PesoActivity extends MainActivity {
             public void onRowClicked(int position) {
                 Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                Intent intent = new Intent(getApplicationContext(), PesoFormActivity.class);
+                intent.putExtra("PesoID", pesos.get(position).getId());
+                startActivity(intent);
             }
         });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

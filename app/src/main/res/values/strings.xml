@@ -11,7 +11,9 @@
 
     <string name="spinnerCategoriaDefault">Categoria</string>
     <string name="spinnerExercicioDefault">Exercício</string>
+    <string name="spinnerDiaDefault">Dia</string>
 
     <string name="DB_NAME">MeuTreino.db</string>
 
 </resources>
+

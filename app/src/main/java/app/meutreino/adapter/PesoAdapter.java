@@ -69,10 +69,9 @@ public class PesoAdapter extends RecyclerView.Adapter<PesoAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Peso peso = list.get(position);
-        holder.peso.setText("Peso: " + peso.getValor());
+        holder.peso.setText(peso.getValor() + " KG");
         holder.dtPesagem.setText(peso.getDataPesagem() != null ?
-                "Data da pesagem: " + new SimpleDateFormat("dd/MM/yyyy").format(peso.getDataPesagem()) :
-                "Data da pesagem:");
+                "Data da pesagem: " + new SimpleDateFormat("dd/MM/yyyy").format(peso.getDataPesagem()) : "");
     }
 
     @Override

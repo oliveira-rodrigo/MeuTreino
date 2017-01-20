@@ -70,9 +70,9 @@ public class TreinoExercicioAdapter extends RecyclerView.Adapter<TreinoExercicio
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         TreinoExercicio treinoExercicio = list.get(position);
-        holder.nome.setText("Exercicio: " + treinoExercicio.getExercicio().getNome());
+        holder.nome.setText(treinoExercicio.getExercicio().getNome());
         holder.series.setText("Séries: " + treinoExercicio.getSeries());
-        holder.carga.setText("Carga: " + treinoExercicio.getCarga());
+        holder.carga.setText("Carga inicial: " + treinoExercicio.getCarga());
     }
 
     @Override

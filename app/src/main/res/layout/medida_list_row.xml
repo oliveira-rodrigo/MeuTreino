@@ -18,7 +18,9 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:text="Medida"
-            android:textColor="#303030" />
+            android:textColor="#303030"
+            android:textSize="14dp"
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/item_remover"

@@ -69,8 +69,8 @@ public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Exercicio exercicio = list.get(position);
-        holder.nomeExercicio.setText("Exercício: " + exercicio.getNome());
-        holder.nomeCategoria.setText("Categoria: " + exercicio.getCategoria().getNome());
+        holder.nomeExercicio.setText(exercicio.getNome());
+        holder.nomeCategoria.setText("Exercício de " + exercicio.getCategoria().getNome());
     }
 
     @Override

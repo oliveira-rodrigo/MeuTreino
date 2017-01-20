@@ -19,7 +19,8 @@
             android:inputType="text"
             android:text="Nome"
             android:textColor="#303030"
-            android:textSize="12dp"/>
+            android:textSize="14dp"
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/item_remover"

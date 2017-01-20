@@ -19,7 +19,8 @@
             android:inputType="text"
             android:text="Nome exercicio"
             android:textColor="#303030"
-            android:textSize="12dp" />
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_nome_categoria"

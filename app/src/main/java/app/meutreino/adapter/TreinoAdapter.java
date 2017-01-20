@@ -8,13 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import app.meutreino.R;
 import app.meutreino.comum.RecyclerViewClickListener;
-import app.meutreino.entidade.Peso;
 import app.meutreino.entidade.Treino;
 import app.meutreino.entidade.TreinoExercicio;
 
@@ -75,13 +72,11 @@ public class TreinoAdapter extends RecyclerView.Adapter<TreinoAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Treino treino = list.get(position);
-        holder.nomeTreino.setText("Nome do treino: " + treino.getNome());
+        holder.nomeTreino.setText(treino.getNome());
         holder.dtInicio.setText(treino.getDataInicio() != null ?
-                "Data de início: " + new SimpleDateFormat("dd/MM/yyyy").format(treino.getDataInicio()) :
-                "Data de início:");
+                "Data de início: " + new SimpleDateFormat("dd/MM/yyyy").format(treino.getDataInicio()) : "");
         holder.dtFim.setText(treino.getDataFim() != null ?
-                "Data de fim: " + new SimpleDateFormat("dd/MM/yyyy").format(treino.getDataFim()) :
-                "Data de fim:");
+                "Data de fim: " + new SimpleDateFormat("dd/MM/yyyy").format(treino.getDataFim()) : "");
 
         long qtdeExercicios = TreinoExercicio.count(TreinoExercicio.class, "TREINO = ?", new String[]{treino.getId().toString()});
         holder.nomeTreino.append(" ( " + qtdeExercicios + " Exercícios )");

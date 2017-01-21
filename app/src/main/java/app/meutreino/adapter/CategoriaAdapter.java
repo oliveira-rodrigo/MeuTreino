@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,14 +26,15 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView nomeCategoria;
-        public ImageView imgDeletar;
+        public Button btnRemover, btnEditar;
 
         public MyViewHolder(View view) {
             super(view);
             nomeCategoria = (TextView) view.findViewById(R.id.tv_nome_categoria);
-            imgDeletar = (ImageView) view.findViewById(R.id.item_remover);
+            btnRemover = (Button) view.findViewById(R.id.btn_remover);
+            btnEditar = (Button) view.findViewById(R.id.btn_editar);
 
-            imgDeletar.setOnClickListener(new View.OnClickListener() {
+            btnRemover.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener != null)
@@ -40,11 +42,11 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.MyVi
                 }
             });
 
-            view.setOnClickListener(new View.OnClickListener() {
+            btnEditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener != null)
-                        listener.onRowClicked(getAdapterPosition());
+                        listener.onViewClicked(v, getAdapterPosition());
                 }
             });
         }

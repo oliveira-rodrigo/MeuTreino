@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_categoria_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
     tools:context="app.meutreino.CategoriaFormActivity">
 
     <RelativeLayout
@@ -33,30 +31,40 @@
 
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabCancelar"
+    <Button
+        android:id="@+id/btn_cancelar"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/margin_8dp"
         android:background="@color/vermelho"
+        android:drawableLeft="@drawable/ic_cancel_white_18dp"
+        android:minHeight="32dp"
+        android:minWidth="84dp"
         android:onClick="cancelar"
-        android:tint="#fff"
-        app:backgroundTint="@color/vermelho"
-        app:fab_colorNormal="@color/vermelho"
-        app:srcCompat="@drawable/ic_cancel_black_48dp" />
+        android:text="Cancelar"
+        android:textColor="@color/branco"
+        android:textSize="14dp"
+        android:textStyle="bold" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabSalvar"
+    <Button
+        android:id="@+id/btn_salvar"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/margin_8dp"
         android:background="@color/verde"
+        android:drawableLeft="@drawable/ic_save_white_18dp"
+        android:minHeight="32dp"
+        android:minWidth="72dp"
         android:onClick="salvar"
-        android:tint="#fff"
-        app:backgroundTint="@color/verde"
-        app:fab_colorNormal="@color/verde"
-        app:srcCompat="@drawable/ic_save_black_48dp" />
+        android:text="Salvar"
+        android:textColor="@color/branco"
+        android:textSize="14dp"
+        android:textStyle="bold" />
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

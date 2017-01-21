@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
 
     Validator validator;
 
-    FloatingActionButton fabCancelar, fabSalvar;
+    Button btnCancelar, btnSalvar;
 
     int categoriaID = 0;
 
@@ -36,13 +37,8 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
 
         getLayoutInflater().inflate(R.layout.activity_categoria_form, frameLayout);
 
-        fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
-        fabSalvar = (FloatingActionButton) findViewById(R.id.fabSalvar);
-
-        fabCancelar.setBackgroundTintList(ColorStateList
-                .valueOf(getResources().getColor(R.color.vermelho)));
-        fabSalvar.setBackgroundTintList(ColorStateList
-                .valueOf(getResources().getColor(R.color.verde)));
+        btnCancelar = (Button) findViewById(R.id.btn_cancelar);
+        btnSalvar = (Button) findViewById(R.id.btn_salvar);
 
         // Setting title
         setTitle("Cadastro de categoria");
@@ -52,7 +48,7 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
         if (getIntent().hasExtra("CategoriaID")) {
             categoriaID = Integer.parseInt(getIntent().getSerializableExtra("CategoriaID").toString());
             if (categoriaID > 0) {
-                Snackbar.make(fabSalvar, "Carregar dados para edição " + categoriaID, Snackbar.LENGTH_LONG)
+                Snackbar.make(btnSalvar, "Carregar dados para edição " + categoriaID, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 // Setting title
@@ -94,7 +90,7 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
             }
             startActivity(new Intent(this, CategoriaActivity.class));
         } catch (Exception e) {
-            Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
+            Snackbar.make(btnSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
     }

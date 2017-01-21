@@ -45,7 +45,7 @@ public class CategoriaActivity extends MainActivity {
         mAdapter = new CategoriaAdapter(categorias, new RecyclerViewClickListener() {
             @Override
             public void onViewClicked(View v, int position) {
-                if (v.getId() == R.id.item_remover) {
+                if (v.getId() == R.id.btn_remover) {
                     Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
@@ -71,17 +71,19 @@ public class CategoriaActivity extends MainActivity {
                         Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
+                } else if (v.getId() == R.id.btn_editar) {
+                    Snackbar.make(fabNovo, "Detalhe item " + categorias.get(position).getId(), Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                    Intent intent = new Intent(getApplicationContext(), CategoriaFormActivity.class);
+                    intent.putExtra("CategoriaID", categorias.get(position).getId());
+                    startActivity(intent);
                 }
             }
 
             @Override
             public void onRowClicked(int position) {
-                Snackbar.make(fabNovo, "Detalhe item " + categorias.get(position).getId(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                Intent intent = new Intent(getApplicationContext(), CategoriaFormActivity.class);
-                intent.putExtra("CategoriaID", categorias.get(position).getId());
-                startActivity(intent);
+                return;
             }
         });
 

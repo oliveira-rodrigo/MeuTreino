@@ -9,52 +9,53 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_nome_categoria"
+            android:id="@+id/tvNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:text="Nome"
             android:textColor="#303030"
             android:textSize="14dp"
+            android:layout_margin="10dp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btn_editar"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_nome_categoria"
-            android:layout_marginRight="@dimen/margin_8dp"
-            android:layout_toLeftOf="@+id/btn_remover"
-            android:background="@color/azul"
-            android:drawableLeft="@drawable/ic_create_white_18dp"
-            android:minHeight="28dp"
-            android:minWidth="60dp"
-            android:text="Editar"
-            android:textColor="@color/branco"
-            android:textSize="12dp"
-            android:textStyle="bold" />
+        <FrameLayout
+            android:id="@+id/frameSeparador"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tvNome"
+            android:layout_margin="10dp"
+            android:background="#eee"></FrameLayout>
 
-        <Button
-            android:id="@+id/btn_remover"
-            style="?android:attr/borderlessButtonStyle"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/tv_nome_categoria"
-            android:background="@color/vermelho"
-            android:drawableLeft="@drawable/ic_delete_white_18dp"
-            android:minHeight="28dp"
-            android:minWidth="72dp"
-            android:text="Remover"
-            android:textColor="@color/branco"
-            android:textSize="12dp"
-            android:textStyle="bold" />
+            android:layout_below="@id/frameSeparador">
+
+            <ImageButton
+                android:id="@+id/btnEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:src="@drawable/ic_pencil_blue_32dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"/>
+
+            <ImageButton
+                android:id="@+id/btnRemover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:src="@drawable/ic_trash_red_32dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

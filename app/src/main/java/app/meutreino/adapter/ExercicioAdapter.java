@@ -32,7 +32,7 @@ public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.MyVi
         public MyViewHolder(View view) {
             super(view);
             nomeExercicio = (TextView) view.findViewById(R.id.tv_nome_exercicio);
-            nomeCategoria = (TextView) view.findViewById(R.id.tv_nome_categoria);
+            nomeCategoria = (TextView) view.findViewById(R.id.tvNomeCategoria);
             imgDeletar = (ImageView) view.findViewById(R.id.item_remover);
 
             imgDeletar.setOnClickListener(new View.OnClickListener() {

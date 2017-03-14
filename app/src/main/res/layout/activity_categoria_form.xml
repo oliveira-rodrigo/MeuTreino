@@ -6,65 +6,80 @@
     android:layout_height="match_parent"
     tools:context="app.meutreino.CategoriaFormActivity">
 
-    <RelativeLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/frameBtns"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/inputLayoutNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Nome da categoria" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/frameBtns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_alignParentBottom="true">
 
-        <TextView
-            android:id="@+id/tv_categoria"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Categoria" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editTextNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_categoria"
-            android:layout_margin="10dp"
-            android:background="@drawable/edittext_form_shape"
-            android:hint="Nome da categoria"
-            android:padding="5dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    </RelativeLayout>
+                <Button
+                    android:id="@+id/btnSalvar"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/verde"
+                    android:onClick="salvar"
+                    android:text="Salvar"
+                    android:textColor="#fff" />
 
-    <Button
-        android:id="@+id/btn_cancelar"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="@dimen/margin_8dp"
-        android:background="@color/vermelho"
-        android:drawableLeft="@drawable/ic_cancel_white_18dp"
-        android:minHeight="32dp"
-        android:minWidth="84dp"
-        android:onClick="cancelar"
-        android:text="Cancelar"
-        android:textColor="@color/branco"
-        android:textSize="14dp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/btn_salvar"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/margin_8dp"
-        android:background="@color/verde"
-        android:drawableLeft="@drawable/ic_save_white_18dp"
-        android:minHeight="32dp"
-        android:minWidth="72dp"
-        android:onClick="salvar"
-        android:text="Salvar"
-        android:textColor="@color/branco"
-        android:textSize="14dp"
-        android:textStyle="bold" />
+                <Button
+                    android:id="@+id/btnCancelar"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="10dp"
+                    android:layout_toRightOf="@id/btnSalvar"
+                    android:layout_weight="1"
+                    android:background="@color/vermelho"
+                    android:onClick="cancelar"
+                    android:text="Cancelar"
+                    android:textColor="#fff" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
 
 </RelativeLayout>

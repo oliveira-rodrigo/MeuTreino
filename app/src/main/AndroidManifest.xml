@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="app.meutreino">
 
     <application
@@ -8,8 +9,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
-
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:replace="android:theme">
 
         <meta-data
             android:name="DATABASE"
@@ -37,9 +38,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".CriarContaActivity" />
-        <activity android:name=".ListaActivity" />
         <activity android:name=".ConfiguracoesActivity" />
-        <activity android:name=".CadastroActivity" />
         <activity android:name=".CategoriaActivity" />
         <activity android:name=".CategoriaFormActivity" />
         <activity android:name=".ExercicioActivity" />

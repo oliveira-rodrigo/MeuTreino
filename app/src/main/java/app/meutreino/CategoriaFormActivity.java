@@ -3,6 +3,7 @@ package app.meutreino;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.appnirman.vaidationutils.ValidationUtils;
+import com.github.pierry.simpletoast.SimpleToast;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
@@ -31,19 +34,21 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
 
     int categoriaID = 0;
 
+    private ValidationUtils validationUtils;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getLayoutInflater().inflate(R.layout.activity_categoria_form, frameLayout);
 
-        btnCancelar = (Button) findViewById(R.id.btn_cancelar);
-        btnSalvar = (Button) findViewById(R.id.btn_salvar);
+        btnCancelar = (Button) findViewById(R.id.btnCancelar);
+        btnSalvar = (Button) findViewById(R.id.btnSalvar);
 
         // Setting title
         setTitle("Cadastro de categoria");
 
-        editText = (EditText) findViewById(R.id.editTextNome);
+        editText = (EditText) findViewById(R.id.etNome);
 
         if (getIntent().hasExtra("CategoriaID")) {
             categoriaID = Integer.parseInt(getIntent().getSerializableExtra("CategoriaID").toString());
@@ -57,12 +62,16 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
             }
         }
 
+        //validationUtils = new ValidationUtils(getApplicationContext());
+
         validator = new Validator(this);
         validator.setValidationListener(this);
     }
 
     public void salvar(View v) {
+
         validator.validate();
+
     }
 
     public void cancelar(View v) {
@@ -90,8 +99,10 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
             }
             startActivity(new Intent(this, CategoriaActivity.class));
         } catch (Exception e) {
-            Snackbar.make(btnSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            //Snackbar.make(btnSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
+            //        .setAction("Action", null).show();
+
+            SimpleToast.error(getApplicationContext(), "Ocorreu um erro na operação: " + e.getMessage());
         }
     }
 
@@ -106,12 +117,18 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
             String message = error.getCollatedErrorMessage(this);
             if (view instanceof EditText) {
                 ((EditText) view).setError(message);
-                Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                ((EditText) view).requestFocus();
+
+                /*Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+
+                SimpleToast.error(getApplicationContext(), "Verifique se os campos estão preenchidos corretamente");
             } else {
                 //quando não for um EditText alertar de outra foma
-                Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /*Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+
+                SimpleToast.error(getApplicationContext(), "Verifique se os campos estão preenchidos corretamente");
             }
         }
     }

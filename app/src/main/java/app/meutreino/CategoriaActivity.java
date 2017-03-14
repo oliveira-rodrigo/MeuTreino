@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class CategoriaActivity extends MainActivity {
     private RecyclerView recyclerView;
     private CategoriaAdapter mAdapter;
     private List<Categoria> categorias;
-    FloatingActionButton fabNovo;
+    Button btnNovo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,7 @@ public class CategoriaActivity extends MainActivity {
         //setContentView(R.layout.activity_categoria);
         getLayoutInflater().inflate(R.layout.activity_categoria, frameLayout);
 
-        fabNovo = (FloatingActionButton) findViewById(R.id.fab_novo);
-        fabNovo.setBackgroundTintList(ColorStateList
-                .valueOf(getResources().getColor(R.color.azul)));
+        btnNovo = (Button) findViewById(R.id.btnNovo);
 
         // Setting title
         setTitle("Categorias");
@@ -45,8 +44,8 @@ public class CategoriaActivity extends MainActivity {
         mAdapter = new CategoriaAdapter(categorias, new RecyclerViewClickListener() {
             @Override
             public void onViewClicked(View v, int position) {
-                if (v.getId() == R.id.btn_remover) {
-                    Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
+                if (v.getId() == R.id.btnRemover) {
+                    Snackbar.make(v, "Remover item", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
                     try {
@@ -64,15 +63,15 @@ public class CategoriaActivity extends MainActivity {
                             mAdapter.notifyItemRemoved(position);
                             mAdapter.notifyItemRangeChanged(position, categorias.size());
                         } else {
-                            Snackbar.make(fabNovo, "Essa categoria não pode ser removida. Existem exercícios vinculadas a ela.", Snackbar.LENGTH_LONG)
+                            Snackbar.make(v, "Essa categoria não pode ser removida. Existem exercícios vinculadas a ela.", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
                     } catch (Exception ex) {
-                        Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
+                        Snackbar.make(v, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
-                } else if (v.getId() == R.id.btn_editar) {
-                    Snackbar.make(fabNovo, "Detalhe item " + categorias.get(position).getId(), Snackbar.LENGTH_LONG)
+                } else if (v.getId() == R.id.btnEditar) {
+                    Snackbar.make(v, "Detalhe item " + categorias.get(position).getId(), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
                     Intent intent = new Intent(getApplicationContext(), CategoriaFormActivity.class);

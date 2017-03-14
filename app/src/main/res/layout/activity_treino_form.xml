@@ -201,8 +201,7 @@
         android:backgroundTint="@color/vermelho"
         android:onClick="cancelar"
         android:tint="#fff"
-        app:fab_colorNormal="@color/vermelho"
-        app:srcCompat="@drawable/ic_cancel_black_48dp" />
+        android:src="@drawable/ic_cancel_black_48dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabSalvar"
@@ -214,7 +213,6 @@
         android:backgroundTint="@color/verde"
         android:onClick="salvar"
         android:tint="#fff"
-        app:fab_colorNormal="@color/verde"
-        app:srcCompat="@drawable/ic_save_black_48dp" />
+        android:src="@drawable/ic_save_black_48dp" />
 
 </android.support.design.widget.CoordinatorLayout>

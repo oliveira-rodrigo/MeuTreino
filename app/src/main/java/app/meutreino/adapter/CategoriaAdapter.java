@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,13 +27,13 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView nomeCategoria;
-        public Button btnRemover, btnEditar;
+        public ImageButton btnRemover, btnEditar;
 
         public MyViewHolder(View view) {
             super(view);
-            nomeCategoria = (TextView) view.findViewById(R.id.tv_nome_categoria);
-            btnRemover = (Button) view.findViewById(R.id.btn_remover);
-            btnEditar = (Button) view.findViewById(R.id.btn_editar);
+            nomeCategoria = (TextView) view.findViewById(R.id.tvNome);
+            btnRemover = (ImageButton) view.findViewById(R.id.btnRemover);
+            btnEditar = (ImageButton) view.findViewById(R.id.btnEditar);
 
             btnRemover.setOnClickListener(new View.OnClickListener() {
                 @Override

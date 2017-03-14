@@ -24,6 +24,6 @@
         android:onClick="abrirCadastro"
         android:tint="#fff"
         app:backgroundTint="@color/azul"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:src="@android:drawable/ic_input_add" />
 
 </android.support.design.widget.CoordinatorLayout>

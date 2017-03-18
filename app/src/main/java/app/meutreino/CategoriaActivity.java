@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.github.pierry.simpletoast.SimpleToast;
+
 import java.util.List;
 
 import app.meutreino.adapter.CategoriaAdapter;
@@ -45,8 +47,8 @@ public class CategoriaActivity extends MainActivity {
             @Override
             public void onViewClicked(View v, int position) {
                 if (v.getId() == R.id.btnRemover) {
-                    Snackbar.make(v, "Remover item", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    //Snackbar.make(v, "Remover item", Snackbar.LENGTH_LONG)
+                    //        .setAction("Action", null).show();
 
                     try {
 
@@ -63,16 +65,18 @@ public class CategoriaActivity extends MainActivity {
                             mAdapter.notifyItemRemoved(position);
                             mAdapter.notifyItemRangeChanged(position, categorias.size());
                         } else {
-                            Snackbar.make(v, "Essa categoria não pode ser removida. Existem exercícios vinculadas a ela.", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null).show();
+                            //Snackbar.make(v, "Essa categoria não pode ser removida. Existem exercícios vinculadas a ela.", Snackbar.LENGTH_LONG)
+                            //        .setAction("Action", null).show();
+                            SimpleToast.error(getApplicationContext(), "Essa categoria não pode ser removida. Existem exercícios vinculadas a ela.");
                         }
                     } catch (Exception ex) {
-                        Snackbar.make(v, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        //Snackbar.make(v, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
+                        //        .setAction("Action", null).show();
+                        SimpleToast.error(getApplicationContext(), "Ocorreu um erro ao remover o item: " + ex.getMessage());
                     }
                 } else if (v.getId() == R.id.btnEditar) {
-                    Snackbar.make(v, "Detalhe item " + categorias.get(position).getId(), Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    //Snackbar.make(v, "Detalhe item " + categorias.get(position).getId(), Snackbar.LENGTH_LONG)
+                    //        .setAction("Action", null).show();
 
                     Intent intent = new Intent(getApplicationContext(), CategoriaFormActivity.class);
                     intent.putExtra("CategoriaID", categorias.get(position).getId());

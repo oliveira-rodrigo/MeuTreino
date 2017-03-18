@@ -53,8 +53,8 @@ public class CategoriaFormActivity extends MainActivity implements Validator.Val
         if (getIntent().hasExtra("CategoriaID")) {
             categoriaID = Integer.parseInt(getIntent().getSerializableExtra("CategoriaID").toString());
             if (categoriaID > 0) {
-                Snackbar.make(btnSalvar, "Carregar dados para edição " + categoriaID, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(btnSalvar, "Carregar dados para edição " + categoriaID, Snackbar.LENGTH_LONG)
+                //       .setAction("Action", null).show();
 
                 // Setting title
                 setTitle("Editar categoria");

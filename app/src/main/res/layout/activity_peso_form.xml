@@ -1,81 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_categoria_form"
+    android:id="@+id/activity_peso_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.meutreino.CategoriaFormActivity">
+    tools:context="app.meutreino.PesoFormActivity">
 
-    <RelativeLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/frameBtns"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/inputLayoutPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Peso"
+                android:inputType="numberDecimal" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/inputLayoutData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inputLayoutPeso">
+
+            <EditText
+                android:id="@+id/editDtPesagem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Data da pesagem"
+                android:inputType="numberSigned" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/frameBtns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="#FFF">
+        android:layout_alignParentBottom="true">
 
-        <TextView
-            android:id="@+id/tv_peso"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Peso" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editPeso"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_peso"
-            android:layout_margin="10dp"
-            android:background="@drawable/edittext_form_shape"
-            android:hint="Peso"
-            android:padding="5dp"
-            android:inputType="numberDecimal"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_data_pesagem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editPeso"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Data da pesagem" />
+                <Button
+                    android:id="@+id/btnSalvar"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/verde"
+                    android:onClick="salvar"
+                    android:text="Salvar"
+                    android:textColor="#fff" />
 
-        <EditText
-            android:id="@+id/editDtPesagem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_data_pesagem"
-            android:layout_margin="10dp"
-            android:background="@drawable/edittext_form_shape"
-            android:hint="Data da pesagem"
-            android:inputType="numberSigned"
-            android:padding="5dp" />
+                <Button
+                    android:id="@+id/btnCancelar"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="10dp"
+                    android:layout_toRightOf="@id/btnSalvar"
+                    android:layout_weight="1"
+                    android:background="@color/vermelho"
+                    android:onClick="cancelar"
+                    android:text="Cancelar"
+                    android:textColor="#fff" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
 
-    </RelativeLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabCancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="@dimen/fab_margin"
-        android:background="@color/vermelho"
-        android:onClick="cancelar"
-        android:tint="#fff"
-        app:backgroundTint="@color/vermelho"
-        android:src="@drawable/ic_cancel_black_48dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabSalvar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:background="@color/verde"
-        android:onClick="salvar"
-        android:tint="#fff"
-        app:backgroundTint="@color/verde"
-        android:src="@drawable/ic_save_black_48dp" />
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

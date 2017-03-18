@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.github.pierry.simpletoast.SimpleToast;
+
 import java.util.List;
 
 import app.meutreino.adapter.ExercicioAdapter;
@@ -46,8 +48,8 @@ public class MedidaActivity extends MainActivity {
             @Override
             public void onViewClicked(View v, int position) {
                 if(v.getId() == R.id.item_remover){
-                    Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    //Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
+                    //        .setAction("Action", null).show();
 
                     try {
                         Medida medida = Medida.findById(Medida.class, medidas.get(position).getId());
@@ -58,16 +60,17 @@ public class MedidaActivity extends MainActivity {
                         mAdapter.notifyItemRemoved(position);
                         mAdapter.notifyItemRangeChanged(position, medidas.size());
                     } catch (Exception ex) {
-                        Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        //Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
+                        //        .setAction("Action", null).show();
+                        SimpleToast.error(getApplicationContext(), "Ocorreu um erro ao remover o item: " + ex.getMessage());
                     }
                 }
             }
 
             @Override
             public void onRowClicked(int position) {
-                Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
 
                 Intent intent = new Intent(getApplicationContext(), MedidaFormActivity.class);
                 intent.putExtra("MedidaID", medidas.get(position).getId());

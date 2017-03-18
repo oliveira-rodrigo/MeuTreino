@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.pierry.simpletoast.SimpleToast;
+
 import java.util.List;
 
 import app.meutreino.adapter.TreinoAdapter;
@@ -45,8 +47,8 @@ public class TreinoActivity extends MainActivity {
             @Override
             public void onViewClicked(View v, int position) {
                 if (v.getId() == R.id.item_remover) {
-                    Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    //Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
+                    //        .setAction("Action", null).show();
 
                     try {
                         Treino treino = Treino.findById(Treino.class, treinos.get(position).getId());
@@ -61,20 +63,22 @@ public class TreinoActivity extends MainActivity {
                             mAdapter.notifyItemRemoved(position);
                             mAdapter.notifyItemRangeChanged(position, treinos.size());
                         } else {
-                            Snackbar.make(fabNovo, "Esse treino não pode ser removido. Existem exercícios vinculados a ele.", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null).show();
+                            //Snackbar.make(fabNovo, "Esse treino não pode ser removido. Existem exercícios vinculados a ele.", Snackbar.LENGTH_LONG)
+                            //        .setAction("Action", null).show();
+                            SimpleToast.error(getApplicationContext(), "Esse treino não pode ser removido. Existem exercícios vinculados a ele.");
                         }
                     } catch (Exception ex) {
-                        Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        //Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
+                        //        .setAction("Action", null).show();
+                        SimpleToast.error(getApplicationContext(), "Ocorreu um erro ao remover o item: " + ex.getMessage());
                     }
                 }
             }
 
             @Override
             public void onRowClicked(int position) {
-                Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
 
                 Intent intent = new Intent(getApplicationContext(), TreinoFormActivity.class);
                 intent.putExtra("TreinoID", treinos.get(position).getId());

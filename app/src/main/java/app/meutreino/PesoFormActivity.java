@@ -9,8 +9,10 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.method.DigitsKeyListener;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
+import com.github.pierry.simpletoast.SimpleToast;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
@@ -28,7 +30,7 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
 
     Validator validator;
 
-    FloatingActionButton fabCancelar, fabSalvar;
+    Button btnCancelar, btnSalvar;
 
     int pesoID = 0;
 
@@ -38,13 +40,8 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
 
         getLayoutInflater().inflate(R.layout.activity_peso_form, frameLayout);
 
-        fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
-        fabSalvar = (FloatingActionButton) findViewById(R.id.fabSalvar);
-
-        fabCancelar.setBackgroundTintList(ColorStateList
-                .valueOf(getResources().getColor(R.color.vermelho)));
-        fabSalvar.setBackgroundTintList(ColorStateList
-                .valueOf(getResources().getColor(R.color.verde)));
+        btnCancelar = (Button) findViewById(R.id.btnCancelar);
+        btnSalvar = (Button) findViewById(R.id.btnSalvar);
 
         // Setting title
         setTitle("Cadastro de peso");
@@ -55,8 +52,8 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
         if (getIntent().hasExtra("PesoID")) {
             pesoID = Integer.parseInt(getIntent().getSerializableExtra("PesoID").toString());
             if (pesoID > 0) {
-                Snackbar.make(fabSalvar, "Carregar dados para edição " + pesoID, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(fabSalvar, "Carregar dados para edição " + pesoID, Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
 
                 // Setting title
                 setTitle("Editar peso");
@@ -103,8 +100,10 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
             peso.save();
             startActivity(new Intent(this, PesoActivity.class));
         } catch (Exception e) {
-            Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            //Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
+            //        .setAction("Action", null).show();
+
+            SimpleToast.error(getApplicationContext(), "Ocorreu um erro na operação: " + e.getMessage());
         }
     }
 
@@ -119,12 +118,17 @@ public class PesoFormActivity extends MainActivity implements Validator.Validati
             String message = error.getCollatedErrorMessage(this);
             if (view instanceof EditText) {
                 ((EditText) view).setError(message);
-                Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+
+                SimpleToast.error(getApplicationContext(), "Verifique se os campos estão preenchidos corretamente");
+
             } else {
                 //quando não for um EditText alertar de outra foma
-                Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+
+                SimpleToast.error(getApplicationContext(), "Verifique se os campos estão preenchidos corretamente");
             }
         }
     }

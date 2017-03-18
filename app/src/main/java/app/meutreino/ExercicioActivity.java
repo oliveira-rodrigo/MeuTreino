@@ -9,6 +9,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+
+import com.github.pierry.simpletoast.SimpleToast;
 
 import java.util.List;
 
@@ -22,7 +25,7 @@ public class ExercicioActivity extends MainActivity {
     private RecyclerView recyclerView;
     private ExercicioAdapter mAdapter;
     private List<Exercicio> exercicios;
-    FloatingActionButton fabNovo;
+    Button btnNovo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +33,7 @@ public class ExercicioActivity extends MainActivity {
         //setContentView(R.layout.activity_exercicio);
         getLayoutInflater().inflate(R.layout.activity_exercicio, frameLayout);
 
-        fabNovo = (FloatingActionButton) findViewById(R.id.fab_novo);
-        fabNovo.setBackgroundTintList(ColorStateList
-                .valueOf(getResources().getColor(R.color.azul)));
+        btnNovo = (Button) findViewById(R.id.btnNovo);
 
         // Setting title
         setTitle("Exercicios");
@@ -44,8 +45,8 @@ public class ExercicioActivity extends MainActivity {
             @Override
             public void onViewClicked(View v, int position) {
                 if (v.getId() == R.id.item_remover) {
-                    Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                   // Snackbar.make(btnNovo, "Remover item", Snackbar.LENGTH_LONG)
+                   //         .setAction("Action", null).show();
 
                     try {
                         Exercicio exercicio = Exercicio.findById(Exercicio.class, exercicios.get(position).getId());
@@ -60,20 +61,23 @@ public class ExercicioActivity extends MainActivity {
                             mAdapter.notifyItemRemoved(position);
                             mAdapter.notifyItemRangeChanged(position, exercicios.size());
                         } else {
-                            Snackbar.make(fabNovo, "Esse exercício não pode ser removido. Existem treinos vinculados a ele.", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null).show();
+                            //Snackbar.make(btnNovo, "Esse exercício não pode ser removido. Existem treinos vinculados a ele.", Snackbar.LENGTH_LONG)
+                            //        .setAction("Action", null).show();
+                            SimpleToast.error(getApplicationContext(), "Esse exercício não pode ser removido. Existem treinos vinculados a ele.");
                         }
                     } catch (Exception ex) {
-                        Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        //Snackbar.make(btnNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
+                        //        .setAction("Action", null).show();
+
+                        SimpleToast.error(getApplicationContext(), "Ocorreu um erro ao remover o item: " + ex.getMessage());
                     }
                 }
             }
 
             @Override
             public void onRowClicked(int position) {
-                Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(btnNovo, "Detalhe item", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
 
                 Intent intent = new Intent(getApplicationContext(), ExercicioFormActivity.class);
                 intent.putExtra("ExercicioID", exercicios.get(position).getId());

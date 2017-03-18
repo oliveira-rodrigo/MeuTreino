@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.github.pierry.simpletoast.SimpleToast;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
@@ -61,8 +62,8 @@ public class ExercicioFormActivity extends MainActivity implements Validator.Val
         if (getIntent().hasExtra("ExercicioID")) {
             exercicioID = Integer.parseInt(getIntent().getSerializableExtra("ExercicioID").toString());
             if (exercicioID > 0) {
-                Snackbar.make(fabSalvar, "Carregar dados para edição " + exercicioID, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(fabSalvar, "Carregar dados para edição " + exercicioID, Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
 
                 // Setting title
                 setTitle("Editar exercício");
@@ -110,8 +111,9 @@ public class ExercicioFormActivity extends MainActivity implements Validator.Val
             startActivity(new Intent(this, ExercicioActivity.class));
 
         } catch (Exception e) {
-            Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            //Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
+            //        .setAction("Action", null).show();
+            SimpleToast.error(getApplicationContext(), "Ocorreu um erro na operação: " + e.getMessage());
         }
     }
 
@@ -126,12 +128,14 @@ public class ExercicioFormActivity extends MainActivity implements Validator.Val
             String message = error.getCollatedErrorMessage(this);
             if (view instanceof EditText) {
                 ((EditText) view).setError(message);
-                Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+                SimpleToast.error(getApplicationContext(), "Verifique se os campos estão preenchidos corretamente");
             } else {
                 //quando não for um EditText alertar de outra foma
-                Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+                SimpleToast.error(getApplicationContext(), "Verifique se os campos estão preenchidos corretamente");
             }
         }
     }

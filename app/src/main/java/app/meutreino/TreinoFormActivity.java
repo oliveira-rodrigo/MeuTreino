@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.github.pierry.simpletoast.SimpleToast;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
@@ -86,8 +87,8 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
         if (getIntent().hasExtra("TreinoID")) {
             treinoID = Integer.parseInt(getIntent().getSerializableExtra("TreinoID").toString());
             if (treinoID > 0) {
-                Snackbar.make(fabSalvar, "Carregar dados para edição " + treinoID, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(fabSalvar, "Carregar dados para edição " + treinoID, Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
 
                 // Setting title
                 setTitle("Editar treino");
@@ -153,8 +154,9 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
 
             startActivity(new Intent(this, TreinoActivity.class));
         } catch (Exception e) {
-            Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            //Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
+            //       .setAction("Action", null).show();
+            SimpleToast.error(getApplicationContext(), "Ocorreu um erro na operação: " + e.getMessage());
         }
     }
 
@@ -169,12 +171,14 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
             String message = error.getCollatedErrorMessage(this);
             if (view instanceof EditText) {
                 ((EditText) view).setError(message);
-                Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+                SimpleToast.error(getApplicationContext(), "Verifique se os campos estão preenchidos corretamente");
             } else {
                 //quando não for um EditText alertar de outra foma
-                Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Verifique se os campos estão preenchidos corretamente", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+                SimpleToast.error(getApplicationContext(), "Verifique se os campos estão preenchidos corretamente");
             }
         }
     }
@@ -237,8 +241,9 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
 
         limparCampos();
 
-        Snackbar.make(v, "Exercício adicionado com sucesso!", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        //Snackbar.make(v, "Exercício adicionado com sucesso!", Snackbar.LENGTH_LONG)
+        //        .setAction("Action", null).show();
+        SimpleToast.info(getApplicationContext(), "Exercício adicionado com sucesso!");
     }
 
     public void carregarListaExercicios() {
@@ -247,15 +252,15 @@ public class TreinoFormActivity extends MainActivity implements Validator.Valida
                 @Override
                 public void onViewClicked(View v, int position) {
                     if (v.getId() == R.id.item_remover) {
-                        Snackbar.make(fabSalvar, "Remover item", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        //Snackbar.make(fabSalvar, "Remover item", Snackbar.LENGTH_LONG)
+                        //        .setAction("Action", null).show();
                     }
                 }
 
                 @Override
                 public void onRowClicked(int position) {
-                    Snackbar.make(fabSalvar, "Detalhe item", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    //Snackbar.make(fabSalvar, "Detalhe item", Snackbar.LENGTH_LONG)
+                    //        .setAction("Action", null).show();
                 }
             });
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

@@ -44,7 +44,7 @@ public class ExercicioActivity extends MainActivity {
         mAdapter = new ExercicioAdapter(exercicios, new RecyclerViewClickListener() {
             @Override
             public void onViewClicked(View v, int position) {
-                if (v.getId() == R.id.item_remover) {
+                if (v.getId() == R.id.btnRemover) {
                    // Snackbar.make(btnNovo, "Remover item", Snackbar.LENGTH_LONG)
                    //         .setAction("Action", null).show();
 
@@ -71,6 +71,13 @@ public class ExercicioActivity extends MainActivity {
 
                         SimpleToast.error(getApplicationContext(), "Ocorreu um erro ao remover o item: " + ex.getMessage());
                     }
+                } else if (v.getId() == R.id.btnEditar) {
+                    //Snackbar.make(v, "Detalhe item " + categorias.get(position).getId(), Snackbar.LENGTH_LONG)
+                    //        .setAction("Action", null).show();
+
+                    Intent intent = new Intent(getApplicationContext(), ExercicioFormActivity.class);
+                    intent.putExtra("ExercicioID", exercicios.get(position).getId());
+                    startActivity(intent);
                 }
             }
 

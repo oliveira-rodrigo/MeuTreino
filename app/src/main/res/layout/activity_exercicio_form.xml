@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_categoria_form"
     android:layout_width="match_parent"
@@ -8,72 +7,96 @@
     android:background="#fff"
     tools:context="app.meutreino.CategoriaFormActivity">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/frameBtns"
         android:layout_margin="10dp">
 
-        <TextView
-            android:id="@+id/tv_categoria"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="Categoria" />
+            android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/spinner_categoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_categoria"
-            android:layout_margin="10dp"
-            android:background="@drawable/edittext_form_shape"
-            android:padding="5dp"
-            android:prompt="@string/spinnerCategoriaDefault" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/inputLayoutCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_nome_exercicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/spinner_categoria"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="Exercício" />
+                <Spinner
+                    android:id="@+id/spinnerCategoria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:prompt="@string/spinnerCategoriaDefault" />
 
-        <EditText
-            android:id="@+id/et_nome_exercicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_nome_exercicio"
-            android:layout_margin="10dp"
-            android:background="@drawable/edittext_form_shape"
-            android:hint="Nome do exercício"
-            android:padding="5dp" />
+            </android.support.design.widget.TextInputLayout>
 
-    </RelativeLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/inputLayoutNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inputLayoutCategoria">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabCancelar"
-        android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/etNomeExercicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Nome do exercício" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/frameBtns"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="@dimen/fab_margin"
-        android:background="@color/vermelho"
-        android:onClick="cancelar"
-        android:tint="#fff"
-        app:backgroundTint="@color/vermelho"
-        android:src="@drawable/ic_cancel_black_48dp" />
+        android:layout_alignParentBottom="true">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabSalvar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:background="@color/verde"
-        android:onClick="salvar"
-        android:tint="#fff"
-        app:backgroundTint="@color/verde"
-        android:src="@drawable/ic_save_black_48dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</android.support.design.widget.CoordinatorLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSalvar"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/verde"
+                    android:onClick="salvar"
+                    android:text="Salvar"
+                    android:textColor="#fff" />
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="10dp"
+                    android:layout_toRightOf="@id/btnSalvar"
+                    android:layout_weight="1"
+                    android:background="@color/vermelho"
+                    android:onClick="cancelar"
+                    android:text="Cancelar"
+                    android:textColor="#fff" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+</RelativeLayout>

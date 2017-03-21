@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,15 +28,16 @@ public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.MyVi
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView nomeExercicio;
         public TextView nomeCategoria;
-        public ImageView imgDeletar;
+        public ImageButton btnRemover, btnEditar;
 
         public MyViewHolder(View view) {
             super(view);
-            nomeExercicio = (TextView) view.findViewById(R.id.tv_nome_exercicio);
+            nomeExercicio = (TextView) view.findViewById(R.id.tvNome);
             nomeCategoria = (TextView) view.findViewById(R.id.tvNomeCategoria);
-            imgDeletar = (ImageView) view.findViewById(R.id.item_remover);
+            btnRemover = (ImageButton) view.findViewById(R.id.btnRemover);
+            btnEditar = (ImageButton) view.findViewById(R.id.btnEditar);
 
-            imgDeletar.setOnClickListener(new View.OnClickListener() {
+            btnRemover.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener != null)
@@ -43,11 +45,11 @@ public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.MyVi
                 }
             });
 
-            view.setOnClickListener(new View.OnClickListener() {
+            btnEditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener != null)
-                        listener.onRowClicked(getAdapterPosition());
+                        listener.onViewClicked(v, getAdapterPosition());
                 }
             });
         }

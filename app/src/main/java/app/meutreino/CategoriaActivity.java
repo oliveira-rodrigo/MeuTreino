@@ -32,7 +32,6 @@ public class CategoriaActivity extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_categoria);
         getLayoutInflater().inflate(R.layout.activity_categoria, frameLayout);
 
         btnNovo = (Button) findViewById(R.id.btnNovo);

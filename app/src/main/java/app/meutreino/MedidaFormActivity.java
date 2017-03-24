@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.github.pierry.simpletoast.SimpleToast;
@@ -26,7 +27,7 @@ public class MedidaFormActivity extends MainActivity implements Validator.Valida
 
     Validator validator;
 
-    FloatingActionButton fabCancelar, fabSalvar;
+    Button btnCancelar, btnSalvar;
 
     int medidaID = 0;
 
@@ -37,13 +38,8 @@ public class MedidaFormActivity extends MainActivity implements Validator.Valida
 
         getLayoutInflater().inflate(R.layout.activity_medida_form, frameLayout);
 
-        fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
-        fabSalvar = (FloatingActionButton) findViewById(R.id.fabSalvar);
-
-        fabCancelar.setBackgroundTintList(ColorStateList
-                .valueOf(getResources().getColor(R.color.vermelho)));
-        fabSalvar.setBackgroundTintList(ColorStateList
-                .valueOf(getResources().getColor(R.color.verde)));
+        btnCancelar = (Button) findViewById(R.id.btnCancelar);
+        btnSalvar = (Button) findViewById(R.id.btnSalvar);
 
         // Setting title
         setTitle("Cadastro de medidas");
@@ -61,7 +57,7 @@ public class MedidaFormActivity extends MainActivity implements Validator.Valida
         if (getIntent().hasExtra("MedidaID")) {
             medidaID = Integer.parseInt(getIntent().getSerializableExtra("MedidaID").toString());
             if (medidaID > 0) {
-                //Snackbar.make(fabSalvar, "Carregar dados para edição " + medidaID, Snackbar.LENGTH_LONG)
+                //Snackbar.make(btnSalvar, "Carregar dados para edição " + medidaID, Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
 
                 // Setting title
@@ -115,7 +111,7 @@ public class MedidaFormActivity extends MainActivity implements Validator.Valida
 
             startActivity(new Intent(this, MedidaActivity.class));
         } catch (Exception e) {
-            //Snackbar.make(fabSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
+            //Snackbar.make(btnSalvar, "Ocorreu um erro na operação: " + e.getMessage(), Snackbar.LENGTH_LONG)
             //        .setAction("Action", null).show();
             SimpleToast.error(getApplicationContext(), "Ocorreu um erro na operação: " + e.getMessage());
         }

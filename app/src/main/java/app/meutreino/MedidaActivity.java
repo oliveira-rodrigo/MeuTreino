@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 
 import com.github.pierry.simpletoast.SimpleToast;
 
@@ -26,7 +27,7 @@ public class MedidaActivity extends MainActivity {
     private RecyclerView recyclerView;
     private MedidaAdapter mAdapter;
     private List<Medida> medidas;
-    FloatingActionButton fabNovo;
+    Button btnNovo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +35,7 @@ public class MedidaActivity extends MainActivity {
 
         getLayoutInflater().inflate(R.layout.activity_medida, frameLayout);
 
-        fabNovo = (FloatingActionButton) findViewById(R.id.fab_novo);
-        fabNovo.setBackgroundTintList(ColorStateList
-                .valueOf(getResources().getColor(R.color.azul)));
+        btnNovo = (Button) findViewById(R.id.btnNovo);
 
         // Setting title
         setTitle("Medidas");
@@ -47,8 +46,8 @@ public class MedidaActivity extends MainActivity {
         mAdapter = new MedidaAdapter(medidas, new RecyclerViewClickListener() {
             @Override
             public void onViewClicked(View v, int position) {
-                if(v.getId() == R.id.item_remover){
-                    //Snackbar.make(fabNovo, "Remover item", Snackbar.LENGTH_LONG)
+                if(v.getId() == R.id.btnRemover){
+                    //Snackbar.make(btnNovo, "Remover item", Snackbar.LENGTH_LONG)
                     //        .setAction("Action", null).show();
 
                     try {
@@ -60,16 +59,23 @@ public class MedidaActivity extends MainActivity {
                         mAdapter.notifyItemRemoved(position);
                         mAdapter.notifyItemRangeChanged(position, medidas.size());
                     } catch (Exception ex) {
-                        //Snackbar.make(fabNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
+                        //Snackbar.make(btnNovo, "Ocorreu um erro ao removero item: " + ex.getMessage(), Snackbar.LENGTH_LONG)
                         //        .setAction("Action", null).show();
                         SimpleToast.error(getApplicationContext(), "Ocorreu um erro ao remover o item: " + ex.getMessage());
                     }
+                } else if (v.getId() == R.id.btnEditar) {
+                    //Snackbar.make(v, "Detalhe item " + categorias.get(position).getId(), Snackbar.LENGTH_LONG)
+                    //        .setAction("Action", null).show();
+
+                    Intent intent = new Intent(getApplicationContext(), MedidaFormActivity.class);
+                    intent.putExtra("MedidaID", medidas.get(position).getId());
+                    startActivity(intent);
                 }
             }
 
             @Override
             public void onRowClicked(int position) {
-                //Snackbar.make(fabNovo, "Detalhe item", Snackbar.LENGTH_LONG)
+                //Snackbar.make(btnNovo, "Detalhe item", Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
 
                 Intent intent = new Intent(getApplicationContext(), MedidaFormActivity.class);

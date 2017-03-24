@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,26 +27,27 @@ public class MedidaAdapter extends RecyclerView.Adapter<MedidaAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView titulo;
-        public ImageView imgDeletar;
+        public ImageButton btnRemover, btnEditar;
 
         public MyViewHolder(View view) {
             super(view);
-            titulo = (TextView) view.findViewById(R.id.tv_titulo);
-            imgDeletar = (ImageView) view.findViewById(R.id.item_remover);
+            titulo = (TextView) view.findViewById(R.id.tvTitulo);
+            btnRemover = (ImageButton) view.findViewById(R.id.btnRemover);
+            btnEditar = (ImageButton) view.findViewById(R.id.btnEditar);
 
-            imgDeletar.setOnClickListener(new View.OnClickListener() {
+            btnRemover.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null)
+                    if(listener != null)
                         listener.onViewClicked(v, getAdapterPosition());
                 }
             });
 
-            view.setOnClickListener(new View.OnClickListener() {
+            btnEditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null)
-                        listener.onRowClicked(getAdapterPosition());
+                    if(listener != null)
+                        listener.onViewClicked(v, getAdapterPosition());
                 }
             });
         }

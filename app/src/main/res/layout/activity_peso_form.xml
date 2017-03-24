@@ -52,16 +52,17 @@
 
     <FrameLayout
         android:id="@+id/frameBtns"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -74,7 +75,6 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_margin="10dp"
-                    android:layout_weight="1"
                     android:background="@color/verde"
                     android:onClick="salvar"
                     android:text="Salvar"
@@ -90,7 +90,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_margin="10dp"
                     android:layout_toRightOf="@id/btnSalvar"
-                    android:layout_weight="1"
                     android:background="@color/vermelho"
                     android:onClick="cancelar"
                     android:text="Cancelar"
